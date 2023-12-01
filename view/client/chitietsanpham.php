@@ -23,7 +23,7 @@
                  <div class="product-details-tab">
                      <div id="img-1" class="zoomWrapper single-zoom">
                          <a href="#">
-                             <img id="zoom1" src="../../upload/<?= $chitiet_sp[0]['anh_sp'] ?>" data-zoom-image="../../upload/<?= $chitiet_sp[0]['anh_sp'] ?>" alt="big-1">
+                             <img id="zoom1" src="../../upload/<?= $chitiet_sp['anh_sp'] ?>" data-zoom-image="../../upload/<?= $chitiet_sp['anh_sp'] ?>" alt="big-1">
                          </a>
                      </div>
 
@@ -31,8 +31,8 @@
              </div>
              <div class="col-lg-6 col-md-6">
                  <div class="product_d_right">
-                     <form action="#">
-                         <h1><a href="#"><?= $chitiet_sp[0]['ten_sp'] ?></a></h1>
+                     <form action="index.php?act=giohang" method="POST">
+                         <h1><a href="#"><?= $chitiet_sp['ten_sp'] ?></a></h1>
 
                          <div class=" product_ratting">
                              <ul>
@@ -46,37 +46,20 @@
 
                          </div>
                          <div class="price_box">
-                             <span class="current_price"><?= $chitiet_sp[0]['gia'] ?></span>
+                             <span class="current_price"><?= number_format($chitiet_sp['gia_sp']) ?><b>đ</b></span>
                              <!-- <span class="old_price">$80.00</span> -->
-
                          </div>
                          <div class="product_desc">
-                             <p><?= $chitiet_sp[0]['mo_ta'] ?> </p>
+                             <p> <?= $chitiet_sp['mo_ta'] ?> </p>
                          </div>
                          <div class="product_variant size">
-                             <label>Màu Sắc</label>
-                             <select class="niceselect_option" id="color2" name="produc_color2">
-                                 <option selected value="1"> chọn màu </option>
-                                 <?php
-                                    foreach ($chitiet_sp as  $value) {
-                                        extract($value);
-                                        echo '  <option value="' . $id . '">' . $mau_sac . '</option>';
-                                    }
-                                    ?>
-                             </select>
+                             <label>Màu Sắc:</label>
+                             <b><?= $chitiet_sp['mau_sac'] ?></b>
                          </div>
 
                          <div class="product_variant size">
-                             <label>size</label>
-                             <select class="niceselect_option" id="color2" name="produc_color2">
-                                 <option selected value="1"> Chọn Size</option>
-                                 <?php
-                                    foreach ($chitiet_sp as  $value) {
-                                        extract($value);
-                                        echo '  <option value="' . $id . '">' . $size . '</option>';
-                                    }
-                                    ?>
-                             </select>
+                             <label>size:</label>
+                             <b><?= $chitiet_sp['size_sp'] ?></b>
                          </div>
                          <div class="product_variant quantity">
                              <label>Số lượng</label>
@@ -84,8 +67,13 @@
 
                          </div>
                          <div class="product_variant quantity">
-
-                             <button class="button" type="submit">add to cart</button>
+                             <input type="hidden" name="id" value="<?= $chitiet_sp['id'] ?>">
+                             <input type="hidden" name="name" value="<?= $chitiet_sp['ten_sp'] ?>">
+                             <input type="hidden" name="price" value="<?= $chitiet_sp['gia_sp'] ?>">
+                             <input type="hidden" name="img" value="<?= $chitiet_sp['anh_sp'] ?>">
+                             <input type="hidden" name="mau" value="<?= $chitiet_sp['mau_sac'] ?>">
+                             <input type="hidden" name="size" value="<?= $chitiet_sp['size_sp'] ?>">
+                             <input type="submit" name="addcard" value="Thêm giỏ hàng">
                              <button class="button" type=""><a href="index.php?act=thanhtoan">thanh toán</a></button>
                          </div>
 
@@ -94,7 +82,7 @@
 
                      <div class="product_d_meta">
 
-                         <span>danh mục: <a href="index.php?act=sanphamct&idsp="><?= $chitiet_sp[0]['ten_dm'] ?></a></span>
+                         <span>danh mục: <a href="index.php?act=sanphamct&idsp="><?= $chitiet_sp['ten_dm'] ?></a></span>
                      </div>
                      <div class="priduct_social">
                          <ul>
@@ -144,7 +132,7 @@
                                          <p><strong>' . $namekh . '</strong>- ' . $ngay_cmt . '</p>
                                          <span>' . $noi_dung . '</span>
                                      </div>
-                                     <a class="xoa_cmt" href="' . $link . '">Xóa </a>
+                                  
                                  </div>
                              
                              </div>';
@@ -159,21 +147,21 @@
                                  <?php
                                     if (isset($_SESSION['user']['id']) and $_SESSION['user']['id'] > 0) {
                                     ?>
-                                      <div class="product_review_form">
-                                     <form action="index.php?act=sanphamct&idsp=<?= $chitiet_sp[0]['id_sp'] ?>" method="post">
-                                         <div class="row">
-                                             <div class="col-12">
-                                                 <label for="review_comment">Bình Luận </label>
-                                                 <input type="hidden" name="idpro" value="<?= $chitiet_sp[0]['id_sp'] ?>">
-                                                 <textarea name="noidung" id="review_comment"></textarea>
+                                     <div class="product_review_form">
+                                         <form action="index.php?act=sanphamct&idsp=<?= $chitiet_sp['id'] ?>" method="post">
+                                             <div class="row">
+                                                 <div class="col-12">
+                                                     <label for="review_comment">Bình Luận </label>
+                                                     <input type="hidden" name="idpro" value="<?= $chitiet_sp['id'] ?>">
+                                                     <textarea name="noidung" id="review_comment"></textarea>
+                                                 </div>
                                              </div>
-                                         </div>
-                                         <div class="cmt">
+                                             <div class="cmt">
 
-                                             <input style="width:100px;height: 40px ;border: none;background: #252525; color: #ffffff;text-transform: uppercase;font-weight: 500;padding: 5px 15px 3px;display: block;-webkit-transition: 0.3s;transition: 0.3s;cursor: pointer;margin-top: 20px;border-radius: 5px;font-size: 13px;" name="binhluan" type="submit" value="Bình luận">
-                                         </div>
-                                     </form>
-                                 </div>
+                                                 <input style="width:100px;height: 40px ;border: none;background: #252525; color: #ffffff;text-transform: uppercase;font-weight: 500;padding: 5px 15px 3px;display: block;-webkit-transition: 0.3s;transition: 0.3s;cursor: pointer;margin-top: 20px;border-radius: 5px;font-size: 13px;" name="binhluan" type="submit" value="Bình luận">
+                                             </div>
+                                         </form>
+                                     </div>
                                  <?php
                                     } else {
                                     ?>
@@ -185,7 +173,7 @@
 
                                     ?>
                                  <!-- form cmt -->
-                                
+
                                  <!-- end form cmt -->
                              </div>
                          </div>

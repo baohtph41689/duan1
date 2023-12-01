@@ -53,9 +53,18 @@ if (is_file($imgpath)) {
                         </div>
                     </div>
                     <div class="form-group">
-            <label for="exampleInputPassword1">Giá sp</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Giá sản phẩm" name="giasp">
-          </div>
+                        <label for="exampleInputPassword1">Kích thước</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" name="size" value="<?= $size_sp ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Màu Sắc</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" name="mausac" value="<?= $mau_sac ?>">
+                    </div>
+                    
+                     <div class="form-group">
+                        <label for="exampleInputPassword1">Giá sp</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Giá sản phẩm" name="giasp" value="<?= $gia_sp ?>">
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Ngày Nhập</label>
                         <input type="date" class="form-control" id="exampleInputPassword1" value="<?= $ngay_nhap ?>" name="ngaynhap">

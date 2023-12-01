@@ -45,37 +45,6 @@
 
                               </ul>
                           </div>
-                          <div class="widget_list widget_color">
-                              <h3>Tìm kiếm theo màu</h3>
-                              <ul>
-                                  <li>
-                                      <a href="#">Black <span>(6)</span></a>
-                                  </li>
-
-
-                              </ul>
-                          </div>
-                          <div class="widget_list widget_color">
-                              <h3>Tìm kiếm theo SIZE</h3>
-                              <ul>
-
-                                  <li>
-                                      <a href="#"> M <span>(8)</span></a>
-                                  </li>
-                                  <li>
-                                      <a href="#">L <span>(10)</span></a>
-                                  </li>
-                                  <li>
-                                      <a href="#"> XL <span>(6)</span></a>
-                                  </li>
-                                  <li>
-                                      <a href="#">XLL <span>(4)</span></a>
-                                  </li>
-
-                              </ul>
-                          </div>
-
-
                       </div>
                   </aside>
                   <!--sidebar widget end-->
@@ -92,7 +61,7 @@
 
                           <button data-role="grid_list" type="button" class="btn-list" data-bs-toggle="tooltip" title="List"></button>
                       </div>
-                      <div class=" niceselect_option">
+                      <!-- <div class=" niceselect_option">
                           <form class="select_option" action="#">
                               <select name="orderby" id="short">
 
@@ -101,7 +70,7 @@
 
                               </select>
                           </form>
-                      </div>
+                      </div> -->
                       <div class="page_amount">
                           <?php
                             foreach ($count_sp as $value) {
@@ -127,15 +96,15 @@
                                               <a class="primary_img" href="<?= $link ?>"><img src="../../upload/<?= $anh_sp ?>" alt=""></a>
 
                                               <div class="action_links">
-                                                  <ul>
-                                                    <input type="hidden" name="id" value="<?=$id?>">
-                                                    <input type="hidden" name="name" value="<?= $ten_sp ?>">
-                                                    <input type="hidden" name="price" value="<?= $gia_sp ?>">
-                                                    <input type="hidden" name="img" value="<?= $anh_sp ?>">
-                                                      <button type="submit" class="giohang" name="addcard">
-                                                          <i class="zmdi zmdi-shopping-cart"></i>
-                                                      </button>
-                                                  </ul>
+
+                                                  <input type="hidden" name="id" value="<?= $id ?>">
+                                                  <input type="hidden" name="name" value="<?= $ten_sp ?>">
+                                                  <input type="hidden" name="price" value="<?= $gia_sp ?>">
+                                                  <input type="hidden" name="img" value="<?= $anh_sp ?>">
+                                                  <input type="hidden" name="mau" value="<?= $mau_sac ?>">
+                                                  <input type="hidden" name="size" value="<?= $size_sp ?>">
+                                                  <button type="submit" name="addcard" class="giohang"><i class="zmdi zmdi-shopping-cart"></i></button>
+
                                               </div>
                                           </div>
                                           <div class="product_content grid_content">
@@ -147,7 +116,7 @@
                                               </div>
                                               <div class="product_price_rating">
                                                   <div class="price_box">
-                                                      <span class="current_price">$<?= $gia_sp ?></span>
+                                                      <span class="current_price"><?= number_format($gia_sp) ?><b>đ</b></span>
                                                   </div>
                                                   <div class="product_rating">
                                                       <ul>
@@ -200,9 +169,3 @@
           </div>
       </div>
   </div>
-
-  <?php
-    // include "footer.php";
-
-    ?>
-  <!--shop  area end-->

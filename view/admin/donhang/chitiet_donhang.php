@@ -1,5 +1,7 @@
 <?php
 include './boxleft.php';
+isset( $ist_dh);
+extract( $ist_dh);
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -21,7 +23,7 @@ include './boxleft.php';
         From
         <address>
           <strong>admin</strong><br>
-          Hà Nội Việt Nam<br>
+          Hà Nội - Việt Nam<br>
           Phone: 0336274225<br>
           Email: baotheha@gmail.com
         </address>
@@ -30,17 +32,17 @@ include './boxleft.php';
       <div class="col-sm-4 invoice-col">
         To
         <address>
-          <strong> <?= $load_ctdh[0]['ho_ten'] ?></strong><br>
-          <strong>Address:</strong> <?= $load_ctdh[0]['dia_chi'] ?><br>
-          <strong>Phone: </strong> <?= $load_ctdh[0]['sdt'] ?><br>
-          <strong>Email: </strong> <?= $load_ctdh[0]['email'] ?><br>
+          <strong>Tên khách hàng: </strong><?php if (isset( $ist_dh['ten_kh']) && ($ist_dh['ten_kh'] != "")) echo $ist_dh['ten_kh']?><br>
+          <strong>Address: </strong> <?php if (isset( $ist_dh['dia_chi']) && ($ist_dh['dia_chi'] != "")) echo $ist_dh['dia_chi']?><br>
+          <strong>Phone: </strong> <?php if (isset( $ist_dh['sdt']) && ($ist_dh['sdt'] != "")) echo $ist_dh['sdt']?><br>
+          <strong>Email: </strong> <?php if (isset( $ist_dh['email']) && ($ist_dh['email'] != "")) echo $ist_dh['email']?><br>
         </address>
       </div>
       <!-- /.col -->
       <div class="col-sm-4 invoice-col">
-        <b>Mã Khuyến Mại:# <?= $load_ctdh[0]['ma_km'] ?></b><br>
-        <b>Mã HD:</b> <?= $load_ctdh[0]['ma_hd'] ?><br>
-        <b>Ngày mua:</b> <?= $load_ctdh[0]['ngay_dat'] ?><br><br>
+        <b>Mã Khuyến Mại:# MKM-0<?php if (isset( $ist_dh['id_km']) && ($ist_dh['id_km'] != "")) echo $ist_dh['id_km']?></b><br>
+        <b>Mã HD:</b>HD-<?php if (isset( $ist_dh['id']) && ($ist_dh['id'] != "")) echo $ist_dh['id']?><br>
+       
       </div>
       <!-- /.col -->
     </div>
@@ -65,21 +67,22 @@ include './boxleft.php';
             <?php
             $tong_tien=0;
             $tien_km=0;
-            foreach ($load_ctdh as $value) {
+            foreach ($cthd as $value) {
               extract($value);
+              $linkupdate = "index.php?act=update_ctdh&idcthd=" . $id;
+              $ttdh = trangthai_donhang(  $trang_thai);
               echo '<tr>
-                        <td>' . $id_cthd . '</td>
+                        <td>' . $id . '</td>
                         <td>' . $ten_sp . '</td>
                         <td>' . $mau_sac . '</td>
-                        <td>' . $size . '</td>
+                        <td>' . $size_sp . '</td>
                         <td>' . $so_luong . '</td>
-                        <td>' . $gia . '</td>
+                        <td>' . $don_gia . '</td>
                         <td>' . $thanh_tien . '</td>
-                        <td>' . $trangthai_donhang . '</td>
+                        <td>' . $ttdh . '</td>
                       </tr>
                      ';
-              $tong_tien+=$thanh_tien;
-              $tien_km=$tong_tien*$phan_tram/100;
+             
             }
             ?>
           </tbody>
@@ -99,20 +102,16 @@ include './boxleft.php';
       </div>
       <!-- /.col -->
       <div class="col-6">
-        <p class="lead"> <?= $load_ctdh[0]['ngay_dat'] ?><br></p>
+      
         <div class="table-responsive">
           <table class="table">
             <tr>
               <th style="width:50%">Tổng Tiền:</th>
-              <td><?=$tong_tien?></td>
-            </tr>
-            <tr>
-              <th>Khuyến mãi( <?= $load_ctdh[0]['phan_tram'] ?>%):</th>
-              <td><?=$tien_km?></td>
+              <td><?=$tong_hd?></td>
             </tr>
             <tr>
               <th>Số Tiền Phải Trả:</th>
-              <td><?= $tong_tien - $tien_km?></td>
+              <td><?= $tong_hd?></td>
             </tr>
           </table>
         </div>
@@ -127,10 +126,6 @@ include './boxleft.php';
       <div class="col-12">
         <a href="index.php?act=list_don_hang"> <button type="submit" class="btn btn-success float-right">Danh Sách
           </button></a>
-
-        <button type="submit" class="btn btn-primary float-right" style="margin-right: 5px;">
-          Sửa Thông Tin
-        </button>
       </div>
     </div>
   </div>

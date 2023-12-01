@@ -15,7 +15,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
     include "../../model/lienhe.php";
     include "../../model/chuc_vu.php";
     include "hearder.php";
-    $count_sp = load_sl_sp();
+    $sl_sp = load_sl_sp();
     $sl_kh = load_sl_kh();
     $sl_news = load_sl_baiviet();
     $sl_order = load_sl_order();
@@ -78,8 +78,10 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                     $giasp = $_POST['giasp'];
                     $img = $_FILES['anhsp']['name'];
                     $tmp_img = $_FILES['anhsp']['tmp_name'];
+                    $size = $_POST['size'];
+                    $mau = $_POST['mausac'];
                     move_uploaded_file($tmp_img, "../../upload/" . $img);
-                    insertsp($tensp, $img, $ngaynhap, $giasp, $mota, $trangthai, $iddm);
+                    insertsp($tensp, $img, $giasp, $size, $mau, $ngaynhap, $mota, $trangthai, $iddm);
                     $thongbao = "them thanh cong !";
                 }
                 $list_dm = load_list_dm();
@@ -110,16 +112,22 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
 
             case "update_sp":
                 if (isset($_POST['capnhat']) && $_POST['capnhat']) {
-                    $id = $_POST['idsp'];
-                    $iddm = $_POST['iddm'];
-                    $tensp = $_POST['tensp'];
-                    $ngaynhap = $_POST['ngaynhap'];
-                    $giasp = $_POST['giasp'];
-                    $mota = $_POST['mota'];
-                    $img = $_FILES['anhsp']['name'];
-                    $tmp_img = $_FILES['anhsp']['tmp_name'];
-                    move_uploaded_file($tmp_img, "../../upload/" . $img);
-                    update_sp($tensp, $img, $giasp, $ngaynhap, $mota, $iddm, $id);
+                    $itemUpdate = [
+                        'id' => $_POST['idsp'],
+                        'iddm' => $_POST['iddm'],
+                        'tensp' => $_POST['tensp'],
+                        'ngaynhap' => $_POST['ngaynhap'],
+                        'giasp' => $_POST['giasp'],
+                        'mota' => $_POST['mota'],
+                        'size' => $_POST['size'],
+                        'mau' => $_POST['mausac'],
+                    ];
+                    if ($_FILES['anhsp']['name'] && $_FILES['anhsp']['tmp_name']) {
+                        $itemUpdate['img'] = $_FILES['anhsp']['name'];
+                        $tmp_img = $_FILES['anhsp']['tmp_name'];
+                        move_uploaded_file($tmp_img, "../../upload/" . $itemUpdate['img']);
+                    }
+                    update_sp($itemUpdate);
                     $thongbao = "cap nhat thanh cong !";
                 }
                 $listdm = load_list_dm();
@@ -134,60 +142,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                 $listsp = load_list_sp("", 0);
                 include "sanpham/list_sp.php";
                 break;
-                //sp bien the
-            case "add_spbt":
-                if (isset($_POST['themmoi']) && $_POST['themmoi']) {
-                    $idsp = $_POST['id_sp'];
-                    $size = $_POST['size'];
-                    $mau = $_POST['mau'];
-                    $soluong = $_POST['soluong'];
-                    $gia = $_POST['giasp'];
-                    $thongbao = "them thanh cong !";
-                    insert_sp_bt($size, $mau, $soluong, $gia, $idsp);
-                    $thongbao = "them thanh cong !";
-                }
-                $listsp = load_list_sp("", 0);
-                include "sanphambienthe/add_sp_bt.php";
-                break;
 
-            case "list_sp_bt":
-                if (isset($_POST['ok']) && $_POST['ok']) {
-                    $keyw = $_POST['keyw'];
-                } else {
-                    $keyw = "";
-                }
-                $listsp = load_list_sp("", 0);
-                $list_spbt = load_list_sp_bt($keyw);
-                include "sanphambienthe/list_sp_bt.php";
-                break;
-            case "sua_spbt":
-                if (isset($_GET['idspbt']) && $_GET['idspbt'] > 0) {
-                    $onespbt = load_one_sp_bt($_GET['idspbt']);
-                }
-                $list_spbt = load_list_sp_bt("");
-                include "sanphambienthe/update_spbt.php";
-                break;
-                //
-            case "update_spbt":
-                if (isset($_POST['capnhat']) && $_POST['capnhat']) {
-                    $size = $_POST['size'];
-                    $mausac = $_POST['mau'];
-                    $soluong = $_POST['soluong'];
-                    $gia = $_POST['giasp'];
-                    $id = $_POST['id_bt'];
-                    update_sp_bt($gia, $size, $mausac, $soluong, $id);
-                    $thongbao = "cap nhat thanh cong !";
-                }
-                $list_spbt = load_list_sp_bt("");
-                include "sanphambienthe/list_sp_bt.php";
-                break;
-            case "xoa_spbt":
-                if (isset($_GET['idspbt']) && $_GET['idspbt'] > 0) {
-                    delete_sp_bt($_GET['idspbt']);
-                }
-                $list_spbt = load_list_sp_bt("");
-                include "sanphambienthe/list_sp_bt.php";
-                break;
                 //bình luận
             case "list_cmt":
                 $result = load_cmt();
@@ -213,9 +168,9 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                         echo "The file";
                     } else {
                     }
-                    $trangthai = $_POST["trang_thai"];
-                    $ngaydang = $_POST["noi_dung"];
-                    inser_tintuc($tieude, $noidung, $filename, $ngaydang, $trangthai);
+                    $mota = $_POST["mota"];
+                    $ngaydang = $_POST["ngay_dang"];
+                    inser_tintuc($tieude, $noidung, $filename, $ngaydang, $mota);
                     $thongbao = "thêm tin tuc thanh cong";
                 }
                 include "tintuc/add_news.php";
@@ -640,22 +595,43 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
 
                 //don hang
             case "list_don_hang":
-                $ist_dh = load_list_hoadon();
+                $list = load_list_hoadon();
                 include "donhang/list_donhang.php";
                 break;
-
+                //chitiet
             case "chitiet_donhang";
                 if (isset($_GET['idhd']) && ($_GET['idhd'] > 0)) {
-                    $load_ctdh = load_chitiet_hd($_GET['idhd']);
+                    $cthd = load_all_cthd($_GET['idhd']);
                 }
-                $ist_dh = load_list_hoadon($_GET['idhd']);
+                $ist_dh = load_one_hd($_GET['idhd']);
                 include "donhang/chitiet_donhang.php";
                 break;
 
             case "xoa_dh":
+                if (isset($_GET['idhd']) && ($_GET['idhd'] > 0)) {
+                    delete_donhang($_GET['idhd']);
+                }
+                $list = load_list_hoadon();
                 include "donhang/list_donhang.php";
                 break;
 
+            case "sua_trangthai":
+                if (isset($_GET['idhd']) && $_GET['idhd'] > 0) {
+                    $result =  load_one_hdct($_GET['idhd']);
+                }
+                include "donhang/update_donhang.php";
+                break;
+            case "update_ctdh":
+                if (isset($_POST['capnhap_hd']) && $_POST['capnhap_hd']) {
+                    $idhd = $_POST['idhd'];
+                    $trang_thai = $_POST["trangthai"];                
+                    update_trangthai($trang_thai,$idhd);
+                  
+                    $thongbao = "cap nhat thanh cong";
+                }
+                $list = load_list_hoadon();
+                include "donhang/list_donhang.php";
+                break;
             case "thoat":
                 session_unset();
                 header('location:login_admin.php');

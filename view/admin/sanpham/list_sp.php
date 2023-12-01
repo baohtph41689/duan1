@@ -35,6 +35,8 @@ include 'boxleft.php';
             <th>mã sản phẩm</th>
             <th>Tên sản phẩm</th>
             <th>Ảnh sản Phẩm</th>
+            <th>Size</th>
+            <th>Màu sắc</th>
             <th>Giá Sản phẩm</th>
             <th>Ngày Nhập</th>
             <th>Mô tả</th>
@@ -58,9 +60,11 @@ include 'boxleft.php';
               <td>' . $id . '</td>
               <td>' . $ten_sp . '</td>
               <td>' . $hinh_sp . '</td>
+              <td>' . $size_sp . '</td>
+              <td>' . $mau_sac . '</td>
               <td>' . $gia_sp . '</td>
               <td>' . $ngay_nhap . '</td>
-              <td>' . $mo_ta . '</td>
+              <td style="width: 200px; height: auto;" >' . $mo_ta . '</td>
               <td>
                 <a href="' . $linkupdate . '" class="btn btn-primary" style="margin-right: 30px;">
                   <i class="bi bi-pencil-fill"></i>
@@ -75,6 +79,7 @@ include 'boxleft.php';
               ';
           }
           ?>
+
         </tbody>
       </table>
     </div>

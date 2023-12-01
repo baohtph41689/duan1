@@ -36,7 +36,7 @@ include './boxleft.php';
                         }
                         echo '<tr>
                                 <td>' . $id . '</td>
-                        <td>' . $tieu_de . '</td>
+                        <td style="width: 200px;height: auto;">' . $tieu_de . '</td>
                         <td>' . $anhtt . '</td>
                         <td>' . $ngay_dang . '</td>
                         <td style="width: 200px; height: auto;">' . $mo_ta . '</td>

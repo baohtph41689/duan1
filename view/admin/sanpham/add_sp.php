@@ -40,6 +40,14 @@ include 'boxleft.php';
             </div>
           </div>
           <div class="form-group">
+            <label for="exampleInputPassword1">Kích thước</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="kích thước..." name="size">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Màu sắc</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Màu sắc ..." name="mausac">
+          </div>
+          <div class="form-group">
             <label for="exampleInputPassword1">Giá sp</label>
             <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Giá sản phẩm" name="giasp">
           </div>

@@ -77,12 +77,6 @@
                   <p>Quản lí sản phẩm  </p>
                 </a>
               </li>
-          <li class="nav-item">
-                <a href="index.php?act=list_sp_bt" class="nav-link">
-                <i class="bi bi-archive-fill"></i>
-                  <p>Quản lí biến thể sản phẩm </p>
-                </a>
-              </li>
           <li class="nav-header">Tài Khoản</li>
           <li class="nav-item">
                 <a href="index.php?act=list_kh" class="nav-link">

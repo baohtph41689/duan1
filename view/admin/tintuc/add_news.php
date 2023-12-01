@@ -14,8 +14,8 @@ include 'boxleft.php';
             <form id="quickForm" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Tiêu đề </label><br>
-                        <input type="text" name="tieu_de" class="form-control" id="exampleInputPassword1" placeholder="Tiêu đề">
+                        <label  for="exampleInputEmail1">Tiêu đề </label><br>
+                        <input  type="text" name="tieu_de" class="form-control" id="exampleInputPassword1" placeholder="Tiêu đề">
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">

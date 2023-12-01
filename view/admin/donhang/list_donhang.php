@@ -13,7 +13,7 @@ include 'boxleft.php';
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Mã hóa đơn</th>
+                      
                         <th>Ngày lập hóa đơn</th>
                         <th>Tên khách hàng </th>
                         <th>Tổng hóa đơn</th>
@@ -23,22 +23,27 @@ include 'boxleft.php';
                 </thead>
                 <tbody>
                     <?php
-                    foreach ( $ist_dh as $value) {
+                    foreach ( $list as $value) {
                         extract($value);
                         $link_cthd = "index.php?act=chitiet_donhang&idhd=" . $id;
-                        $linkdelete = "index.php?act=xoa_sp&idhd=" . $id;
+                        $linkdelete = "index.php?act=xoa_dh&idhd=" . $id;
+                        $linkupdate = "index.php?act=sua_trangthai&idhd=" . $id;
                         echo' <tr>
                         <td>'.$id.'</td>
-                            <td>'.$ma_hd.'</td>
+                           
                             <td>'.$ngay_dat.'</td>
-                            <td>'.$name.'</td>
-                            <td>'.$soluong_hd.'</td>
-                            <td>'.$tongtien.'</td>
+                            <td>'.$ten_kh.'</td>
+                            <td>'.$sodon.'</td>
+                            <td>'.$tong_hd.'</td>
                             <td>
-                                <a href="'. $link_cthd.'" class="btn btn-primary" style="margin-right: 30px;">
-                                    <i class="bi bi-pencil-fill"></i>
+                                <a href="'. $link_cthd.'" class="btn btn-primary">
+                                  
                                     Chi tiết
                                 </a>
+                                <a href="'.  $linkupdate .'" class="btn btn-primary" style="margin: 0 10px;">
+                                <i class="bi bi-pencil-fill"></i>
+                                Sửa 
+                            </a>
                                 <a href="'.  $linkdelete .'" class="btn btn-primary">
                                     <i class="bi bi-trash3-fill"></i>
                                     xóa
@@ -50,7 +55,7 @@ include 'boxleft.php';
                     
                     
                     ?>
-                   
+                  
 
                 </tbody>
             </table>

@@ -22,7 +22,7 @@ include './boxleft.php';
             <th>Fax</th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           <?php
           foreach ($listhethong as $hethong) {
             extract($hethong);
@@ -47,10 +47,7 @@ include './boxleft.php';
              <i class="bi bi-pencil-fill"></i>
           Edit
              </a>
-           <a href="' . $xoahethong . '" class="btn btn-primary">
-                   <i class="bi bi-trash3-fill"></i>
-                                Xóa
-                            </a>
+         
                         </td>
                                 
                                </tr>  ';

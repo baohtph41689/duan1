@@ -30,7 +30,7 @@ include './boxleft.php';
         <div class="inner">
           <h3>
             <?php
-            foreach ($count_sp as $value) {
+            foreach ($sl_sp as $value) {
               extract($value);
               echo ' ' . $sl . '<sup style="font-size: 20px">sản phẩm</sup></h3>';
             }

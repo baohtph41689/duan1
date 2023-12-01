@@ -15,7 +15,7 @@ function load_one_lh($id)
     return $result;
 }
 
-function update_lh($trangthai,$id)
+function update_lh($trangthai, $id)
 {
     $sql = "update lien_he set trang_thai='$trangthai' where id=$id";
     pdo_execute($sql);
@@ -26,4 +26,9 @@ function delete_lh($idlh)
     $sql = "delete from lien_he where id=" . $idlh;
     $result = pdo_execute($sql);
 }
-?>
+
+function insertlh($noidung, $idkh)
+{
+    $sql = "INSERT INTO lien_he(noi_dung,id_user) VALUES('$noidung','$idkh')";
+    pdo_execute($sql);
+}
