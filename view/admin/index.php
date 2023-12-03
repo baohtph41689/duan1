@@ -27,8 +27,7 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                 if (isset($_POST['themmoi']) && $_POST['themmoi']) {
                     $tendm = $_POST['ten_dm'];
                     $mota = $_POST['mota'];
-                    $trangthai = $_POST['trangthai'];
-                    insertdm($tendm, $mota, $trangthai);
+                    insertdm($tendm, $mota);
                     $thongbao = "them thanh cong !";
                 }
                 include "danhmuc/add_dm.php";
@@ -621,17 +620,18 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                 }
                 include "donhang/update_donhang.php";
                 break;
-            case "update_ctdh":
+            case "update_trangthai":
                 if (isset($_POST['capnhap_hd']) && $_POST['capnhap_hd']) {
+                    
                     $idhd = $_POST['idhd'];
-                    $trang_thai = $_POST["trangthai"];                
-                    update_trangthai($trang_thai,$idhd);
-                  
+                    $trang_thai = $_POST["trangthai"];
+                    update_trangthai($idhd,$trang_thai);
                     $thongbao = "cap nhat thanh cong";
                 }
                 $list = load_list_hoadon();
                 include "donhang/list_donhang.php";
                 break;
+
             case "thoat":
                 session_unset();
                 header('location:login_admin.php');

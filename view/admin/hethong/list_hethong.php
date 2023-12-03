@@ -6,7 +6,14 @@ include './boxleft.php';
     <div class="card-header border-0">
       <h3>Danh sách thông tin hệ thống </h3>
       <div style="float: right;">
-        <a href="index.php?act=add_hethong"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a>
+        <?php
+        if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+        ?>
+          <a href="index.php?act=add_hethong"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a>
+        <?php
+        }
+        ?>
+
       </div>
     </div>
     <div class="card-body table-responsive p-0">
@@ -34,27 +41,39 @@ include './boxleft.php';
             } else {
               $logo = "no photo";
             }
-            echo '<tr>
-        <td>' . $id . '</td>
-        <td>' . $ten_cuahang . '</td>
-        <td>' . $sdt_cuahang . '</td>
-        <td>' . $email_cuahang . '</td>
-       <td>' . $diachi_cuahang . '</td>
-        <td>' . $logo . '</td>
-        <td>' . $so_fax . '</td>
-           <td>
-             <a href="' . $suahethong . '" class="btn btn-primary" style="margin-right: 30px;">
-             <i class="bi bi-pencil-fill"></i>
-          Edit
-             </a>
-         
-                        </td>
-                                
-                               </tr>  ';
+          ?>
+            <tr>
+              <td><?= $id ?></td>
+              <td><?= $ten_cuahang ?></td>
+              <td><?= $sdt_cuahang ?></td>
+              <td><?= $email_cuahang ?></td>
+              <td><?= $diachi_cuahang ?></td>
+              <td><?= $logo ?></td>
+              <td><?= $so_fax ?></td>
+              <?php
+              if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+              ?>
+                <td>
+                  <a href="<?= $suahethong ?>" class="btn btn-primary" style="margin-right: 30px;">
+                    <i class="bi bi-pencil-fill"></i>
+                    Edit
+                  </a>
+
+                </td>
+              <?php
+              }
+
+              ?>
+
+
+            </tr>
+
+          <?php
           }
 
           ?>
-          </tr>
+
+
         </tbody>
       </table>
     </div>

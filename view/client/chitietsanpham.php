@@ -63,7 +63,7 @@
                          </div>
                          <div class="product_variant quantity">
                              <label>Số lượng</label>
-                             <input min="1" max="100" value="1" type="number" name="soluong">
+                             <input  style="width: 40px;text-align: center;" min="1" max="100" value="1" type="text" name="soluong">
 
                          </div>
                          <div class="product_variant quantity">
@@ -73,8 +73,8 @@
                              <input type="hidden" name="img" value="<?= $chitiet_sp['anh_sp'] ?>">
                              <input type="hidden" name="mau" value="<?= $chitiet_sp['mau_sac'] ?>">
                              <input type="hidden" name="size" value="<?= $chitiet_sp['size_sp'] ?>">
-                             <input type="submit" name="addcard" value="Thêm giỏ hàng">
-                             <button class="button" type=""><a href="index.php?act=thanhtoan">thanh toán</a></button>
+                             <input class="abcd" style="font-size: 16px;background-color:#09c6ab ;" type="submit" name="addcard" value="Thêm giỏ hàng">
+                             <!-- <button class="button" type=""><a href="index.php?act=thanhtoan">thanh toán</a></button> -->
                          </div>
 
 
@@ -109,7 +109,7 @@
                          <ul class="nav" role="tablist">
 
                              <li>
-                                 <a data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Bình luận (1)</a>
+                                 <a data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Bình luận</a>
                              </li>
                          </ul>
                      </div>
@@ -147,7 +147,7 @@
                                  <?php
                                     if (isset($_SESSION['user']['id']) and $_SESSION['user']['id'] > 0) {
                                     ?>
-                                     <div class="product_review_form">
+                                     <div style="background-color: #ffffff;" class="product_review_form">
                                          <form action="index.php?act=sanphamct&idsp=<?= $chitiet_sp['id'] ?>" method="post">
                                              <div class="row">
                                                  <div class="col-12">

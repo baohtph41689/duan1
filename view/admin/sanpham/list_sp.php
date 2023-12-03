@@ -39,8 +39,7 @@ include 'boxleft.php';
             <th>Màu sắc</th>
             <th>Giá Sản phẩm</th>
             <th>Ngày Nhập</th>
-            <th>Mô tả</th>
-            <th>More</th>
+
 
           </tr>
         </thead>
@@ -55,28 +54,34 @@ include 'boxleft.php';
             if (is_file($imgpath)) {
               $hinh_sp = "<img src='" . $imgpath . "' height='60' width='80'> ";
             }
-            echo '
-              <tr>
-              <td>' . $id . '</td>
-              <td>' . $ten_sp . '</td>
-              <td>' . $hinh_sp . '</td>
-              <td>' . $size_sp . '</td>
-              <td>' . $mau_sac . '</td>
-              <td>' . $gia_sp . '</td>
-              <td>' . $ngay_nhap . '</td>
-              <td style="width: 200px; height: auto;" >' . $mo_ta . '</td>
-              <td>
-                <a href="' . $linkupdate . '" class="btn btn-primary" style="margin-right: 30px;">
-                  <i class="bi bi-pencil-fill"></i>
-                  Edit
-                </a>
-                <a href="' . $linkdelete . '" class="btn btn-primary">
-                  <i class="bi bi-trash3-fill"></i>
-                  xóa
-                </a>
-              </td>
-              </tr>
-              ';
+          ?>
+            <tr>
+              <td><?= $id ?></td>
+              <td><?= $ten_sp ?></td>
+              <td><?= $hinh_sp ?></td>
+              <td><?= $size_sp ?></td>
+              <td><?= $mau_sac ?></td>
+              <td><?= $gia_sp ?></td>
+              <td><?= $ngay_nhap ?></td>
+              <?php
+              if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+              ?>
+                <td>
+                  <a href="<?= $linkupdate ?>" class="btn btn-primary" style="margin-right: 30px;">
+                    <i class="bi bi-pencil-fill"></i>
+                    Edit
+                  </a>
+                  <a href="<?= $linkdelete ?>" class="btn btn-primary">
+                    <i class="bi bi-trash3-fill"></i>
+                    xóa
+                  </a>
+                </td>
+              <?php
+              }
+              ?>
+
+            </tr>
+          <?php
           }
           ?>
 

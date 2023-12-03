@@ -43,7 +43,7 @@
                         <div class="product-header">
                             <div class="section_title">
                                 <h2>Sản Phẩm Mới Nhất</h2>
-                                <p>Browse the collection of our best selling and trending products</p>
+                                <p>Những sản phẩm mới nhất tại cửa hàng và xu thế thời trang hiện đại</p>
                             </div>
 
                         </div>
@@ -143,7 +143,7 @@
                     <div class="col-12">
                         <div class="section_title">
                             <h2>SẢN PHẨM NỔI BẬT</h2>
-                            <p>We carry designer fashion that retail for much more at other stores</p>
+                            <p>Những sản phẩm được yêu thích nhiều nhất gần đây </p>
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="instagram_text">
-                            <h2># Presiden on instagram</h2>
+                            <h2>Thế Giới Thời Trang</h2>
                             <p>Hãy cho chúng tôi biết cách bạn tạo kiểu cho các tác phẩm Hiếm của mình trên Instagram với hashtag #Presiden.</p>
                         </div>
                     </div>

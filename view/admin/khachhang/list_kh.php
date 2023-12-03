@@ -11,7 +11,14 @@ include 'boxleft.php';
                     <input type="submit" name="ok" value="Tìm kiếm">
                 </form>
                 <div style="float: right;">
-                    <a href="index.php?act=add_kh"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a>
+                <?php
+                    if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+                    ?>
+                        <a href="index.php?act=add_kh"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a>
+                    <?php
+                    }
+                    ?>
+                   
                 </div>
             </div>
         </div>
@@ -27,7 +34,6 @@ include 'boxleft.php';
                         <th>Địa Chỉ</th>
                         <th>Email</th>
                         <th>SĐT</th>
-                        <th>More</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,30 +42,39 @@ include 'boxleft.php';
                         extract($list);
                         $linkupdate = "index.php?act=sua_tt_khachhang&idkh=" . $id;
                         $linkdelete = "index.php?act=xoa_tt_khachhang&idkh=" . $id;
-                        echo ' <tr>
-                        <td>' . $id . '</td>
-                        <td>' . $user_name . '</td>
-                        <td>' . $pass . '</td>
-                        <td>' . $ho_ten . '</td>
-                        <td>' . $ngay_sinh . '</td>
-                        <td style="width: 100px; height: auto;">' . $dia_chi . ' </td>
-                        <td>' . $email . '</td>
-                        <td>' . $sdt . '</td>
-                      
-                        <td>
-                            <a href="' . $linkupdate . '" class="btn btn-primary" style="margin-right: 30px;">
-                                <i class="bi bi-pencil-fill"></i>
-                                Edit
-                            </a>
-                            <a href="' . $linkdelete . '" class="btn btn-primary">
-                                <i class="bi bi-trash3-fill"></i>
-                                xóa
-                            </a>
-                        </td>
-                    </tr>';
+                    ?>
+                        <tr>
+                            <td><?= $id ?></td>
+                            <td><?= $user_name ?></td>
+                            <td><?= $pass ?></td>
+                            <td><?= $ho_ten ?></td>
+                            <td><?= $ngay_sinh ?></td>
+                            <td style="width: 100px; height: auto;"><?= $dia_chi ?> </td>
+                            <td><?= $email ?></td>
+                            <td><?= $sdt ?></td>
+                            <?php
+                            if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+                            ?>
+                                <td>
+                                    <a href="<?= $linkupdate ?>" class="btn btn-primary" style="margin-right: 30px;">
+                                        <i class="bi bi-pencil-fill"></i>
+                                        Edit
+                                    </a>
+                                    <a href="<?= $linkdelete ?>" class="btn btn-primary">
+                                        <i class="bi bi-trash3-fill"></i>
+                                        xóa
+                                    </a>
+                                </td>
+                            <?php
+                            }
+                            ?>
+
+                        </tr>
+
+                    <?php
                     }
                     ?>
-                     
+
                 </tbody>
             </table>
         </div>

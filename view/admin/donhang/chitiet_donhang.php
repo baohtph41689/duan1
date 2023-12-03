@@ -12,25 +12,16 @@ extract( $ist_dh);
     <div class="row">
       <div class="col-12">
         <h4>
-          <i class="fas fa-globe"></i> AdminLTE, Inc.
+          <i class="fas fa-globe"></i> CHi tiết đơn hàng
         </h4>
       </div>
       <!-- /.col -->
     </div>
     <!-- info row -->
     <div class="row invoice-info">
-      <div class="col-sm-4 invoice-col">
-        From
-        <address>
-          <strong>admin</strong><br>
-          Hà Nội - Việt Nam<br>
-          Phone: 0336274225<br>
-          Email: baotheha@gmail.com
-        </address>
-      </div>
+      
       <!-- /.col -->
       <div class="col-sm-4 invoice-col">
-        To
         <address>
           <strong>Tên khách hàng: </strong><?php if (isset( $ist_dh['ten_kh']) && ($ist_dh['ten_kh'] != "")) echo $ist_dh['ten_kh']?><br>
           <strong>Address: </strong> <?php if (isset( $ist_dh['dia_chi']) && ($ist_dh['dia_chi'] != "")) echo $ist_dh['dia_chi']?><br>
@@ -39,7 +30,7 @@ extract( $ist_dh);
         </address>
       </div>
       <!-- /.col -->
-      <div class="col-sm-4 invoice-col">
+      <div style="margin-top: 10px;" class="col-sm-4 invoice-col">
         <b>Mã Khuyến Mại:# MKM-0<?php if (isset( $ist_dh['id_km']) && ($ist_dh['id_km'] != "")) echo $ist_dh['id_km']?></b><br>
         <b>Mã HD:</b>HD-<?php if (isset( $ist_dh['id']) && ($ist_dh['id'] != "")) echo $ist_dh['id']?><br>
        
@@ -77,8 +68,8 @@ extract( $ist_dh);
                         <td>' . $mau_sac . '</td>
                         <td>' . $size_sp . '</td>
                         <td>' . $so_luong . '</td>
-                        <td>' . $don_gia . '</td>
-                        <td>' . $thanh_tien . '</td>
+                        <td>' . number_format($don_gia) . '</td>
+                        <td>' . number_format($thanh_tien) . '</td>
                         <td>' . $ttdh . '</td>
                       </tr>
                      ';

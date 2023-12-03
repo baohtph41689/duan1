@@ -2,23 +2,20 @@
 session_start();
 include "../../model/pdo.php";
 include "../../model/login.php";
-
 if (isset($_POST['dangnhap'])) {
     $user = $_POST['user'];
     $pass = $_POST['pass'];
-       $checkuser=check_user($user, $pass);
-       if ( is_array($checkuser)) {
+    $checkuser = check_user($user, $pass);
+    if (is_array($checkuser)) {
         $_SESSION['user'] = $checkuser;
-        extract( $_SESSION['user']);
-        if ($id_chucvu != 0 ) {
+        extract($_SESSION['user']);
+        if ($id_chucvu != 0) {
             header('location:index.php');
-        }else{
-            $thongbao1="UserName or password not provided";
-           
+        } else {
+            $thongbao1 = "UserName or password not provided";
         }
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,45 +74,25 @@ if (isset($_POST['dangnhap'])) {
                         <!-- /.col -->
                         <div>
                             <button type="submit" class="btn btn-primary" name="dangnhap">Đăng Nhập</button>
-                          
+
                         </div>
                         <div style="padding-top: 10px; padding-left: 40px;">
 
-                        <?php
-                          if (isset($thongbao1) && $thongbao1 != "") {
-                            echo $thongbao1;
-                          }
-                          
-                       
-                          ?>
+                            <?php
+                            if (isset($thongbao1) && $thongbao1 != "") {
+                                echo $thongbao1;
+                            }
+                            ?>
                         </div>
-                       
                         <!-- /.col -->
                     </div>
                 </form>
-
-                <!-- <div class="social-auth-links text-center mt-2 mb-3">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div> -->
-                <!-- /.social-auth-links -->
-                <!-- <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p> -->
             </div>
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
     </div>
     <!-- /.login-box -->
-
     <!-- jQuery -->
     <script src="../../thu_vien/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->

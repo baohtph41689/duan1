@@ -5,6 +5,12 @@ function insertsp($tensp, $img_name, $giasp, $size, $mau, $ngaynhap, $mota, $tra
     pdo_execute($sql);
 }
 
+function price(){
+    $sql="SELECT * FROM price_search where status=1";
+    $result=pdo_query($sql);
+    return $result;
+}
+
 
 function load_list_sp($keyw, $iddm)
 {
@@ -13,10 +19,36 @@ function load_list_sp($keyw, $iddm)
         $sql .= " AND ten_sp LIKE '%" . $keyw . "%'";
     }
     if ($iddm > 0) {
-        $sql .= " AND id_dm LIKE '%" . $iddm . "%'";
+        $sql .= " AND id_dm = " . $iddm . "";
     }
+   
+        if (isset($_GET['price'])) {
+            $price = $_GET['price'];
+            //dùng để tách giấu và giá tiền thành những chữ con trả về 1 mảng từ string ban đầu
+           $range = preg_split('[\s]',$price);
+    
+       
+           //$range chứa các chữ con tương ứng(còn dc gọi là 1 mảng )
+          $from=0;
+          $to=0;
+          if ($range[0]=="Từ") {
+            $from=$range[1];
+          }else {
+            $range1=preg_split('[\-]',$range[0]);
+            $from=$range1[0];
+            $to=$range1[1];
+          }
+          $from*=1000;
+          $to*=1000;
+          if ($to==0) {
+            $sql .= " AND gia_sp>=$from";
+          }else {
+            $sql .= " AND gia_sp>=$from and gia_sp<=$to";
+          }
 
-    $sql .= " order by sanpham.id desc limit 0,9";
+        }
+    
+    $sql .= " order by sanpham.id desc ";
     $listsp = pdo_query($sql);
     return $listsp;
 }

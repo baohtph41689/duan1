@@ -21,13 +21,6 @@ include './boxleft.php';
                   <label>Mô tả</label>
                   <textarea class="form-control" rows="3" name="mota" placeholder="Enter ..."></textarea>
                 </div>
-                <div class="form-group">
-                  <label>Trạng thái</label>
-                  <select class="form-control" name="trangthai">
-                    <option>Hiển thị</option>
-                    <option>Ẩn</option>
-                  </select>
-                </div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer">

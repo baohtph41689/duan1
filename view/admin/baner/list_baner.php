@@ -20,8 +20,6 @@ include './boxleft.php';
                         <th>Ảnh banner</th>
                         <th>link</th>
                         <th>Mô Tả</th>
-                        <th>Trạng thái</th>
-                        <th>More</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,30 +30,42 @@ include './boxleft.php';
                         $xoatbanner = "index.php?act=xoa_bn&id=" . $id;
                         $anhbanner = "../../upload/" .  $hinh_anh;
                         if (is_file($anhbanner)) {
-                            $anhbn = "<img src='" . $anhbanner . "' height='80px'>";
+                            $anhbn = "<img src='" . $anhbanner . "' height='80px'width=150px>";
                         } else {
                             $anhbn = "no photo";
                         }
-                        echo '<tr>
-                            <td>' . $id . '</td>
-                            <td>' . $ten . '</td>
-                            <td>' . $anhbn . '</td>
-                            <td style="width: 200px; height: auto;"><a href="' . $link . '">' . $link . '</a></td>
-                            <td>' . $mo_ta . '</td>
-                            <td>' . $trang_thai . '</td>
-                            <td>
-                                <a href="' . $suatbanner . '" class="btn btn-primary" style="margin-right: 30px;">
+                    ?>
+                        <tr>
+                            <td> <?=$id?> </td>
+                            <td><?=$ten?></td>
+                            <td><?=$anhbn?></td>
+                            <td style="width: 200px; height: auto;"><a href="' . $link . '"><?=$link?></a></td>
+                            <td> <?=$mo_ta?></td>
+                           
+                           
+                                <?php
+                                if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu']<2)) {
+                                  ?>
+                                   <td>
+                                    <a href="<?=$suatbanner?>" class="btn btn-primary" style="margin-right: 30px;">
                                     <i class="bi bi-pencil-fill"></i>
                                     Edit
                                 </a>
-                                <a href="' . $xoatbanner . '" class="btn btn-primary">
+                                <a href="<?=$xoatbanner?>" class="btn btn-primary">
                                     <i class="bi bi-trash3-fill"></i>
                                     Xóa
                                 </a>
-                            </td>
-                        </tr>';
+                                </td>
+                                  <?php  
+                                }
+                                ?>
+                              
+                         
+                        </tr>
+                    <?php
                     }
                     ?>
+
                 </tbody>
             </table>
         </div>

@@ -23,7 +23,7 @@ $all_hethong = loadall_hethong();
 $all_news = loadall_tintuc();
 $all_baner = loadall_banner();
 $all_dm = load_list_dm();
-$all_sp = load_list_sp("", 0);
+$all_sp = load_list_sp("", 0,0);
 $sp_noibat = load_list_sp_noibat();
 include "header.php";
 if (isset($_GET['act']) && ($_GET['act'] != "")) {
@@ -41,11 +41,13 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             } else {
                 $iddm = "";
             }
+            $search=price();
             $all_sp = load_list_sp($timkiem, $iddm);
             $all_dm = load_list_dm();
             include "listsanpham.php";
             break;
         case 'sanphamct':
+            
             if (isset($_POST['binhluan']) && $_POST['binhluan']) {
                 $iduser = $_SESSION['user']['id'];
                 $date = date('Y-m-d');
@@ -60,34 +62,34 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             }
             include "chitietsanpham.php";
             break;
-            case 'khuyenmai':
-                if (!isset($_POST['guikm'])) {
+        case 'khuyenmai':
+            if (!isset($_POST['guikm'])) {
+                $phantramkm = 0;
+                $_SESSION['khuyenmai'] = [];
+            }
+            if (isset($_POST['guikm'])) {
+                $makm = $_POST['makm'];
+                $check = check_makm($makm);
+                if (is_array($check)) {
+                    $mkm = $check['ma_km'];
+                    $id = $check['id'];
+                    $tenkm = $check['ten_km'];
+                    $phantramkm = $check['phan_tram'];
+                    $_SESSION['khuyenmai'] = $check;
+                } else {
+                    $mkm = "";
+                    $id = "";
+                    $tenkm = "";
                     $phantramkm = 0;
-                    $_SESSION['khuyenmai'] = [];
+                    $thongbao_email = "Mã khuyến mại này không tồn tại !";
                 }
-                if (isset($_POST['guikm'])) {
-                    $makm = $_POST['makm'];
-                    $check = check_makm($makm);
-                    if (is_array($check)) {
-                        $mkm = $check['ma_km'];
-                        $id = $check['id'];
-                        $tenkm = $check['ten_km'];
-                        $phantramkm = $check['phan_tram'];
-                        $_SESSION['khuyenmai'] = $check;
-                    } else {
-                        $mkm = "";
-                        $id = "";
-                        $tenkm = "";
-                        $phantramkm = 0;
-                        $thongbao_email = "Mã khuyến mại này không tồn tại !";
-                    }
-                }
-                include "giohang.php";
-                break;
-    
+            }
+            include "giohang.php";
+            break;
+
             //
         case 'giohang':
-          
+
             if ((isset($_POST['addcard']))) {
                 $id = $_POST['id'];
                 $tensp = $_POST['name'];
@@ -130,12 +132,11 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
 
         case 'ht_donhang':
             if (isset($_POST['dathang']) && $_POST['dathang']) {
-                if (isset($_SESSION['user']) && $_SESSION['user'] !="") {
+                if (isset($_SESSION['user']) && $_SESSION['user'] != "") {
                     $iduser = $_SESSION['user']['id'];
-                }else {
-                    $iduser="";
+                } else {
+                    $iduser = "";
                 }
-               
                 $name = $_POST['name'];
                 $addr = $_POST['addr'];
                 $sdt = $_POST['sdt'];
@@ -161,12 +162,19 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                     insert_cart($soluong, $giasp, $thanhtien, $idsp, $idbill);
                 }
                 //xoa $_SESSION['mycard'] sau khi tạo xong đơn hàng
-                $_SESSION['mycard']=[];
+                $_SESSION['mycard'] = [];
+                $_SESSION['khuyenmai'] = [];
             }
-            $list_hdct=load_one_hdct( $idbill);
-            $list_cthd=load_all_cthd($idbill);
+            $list_hdct = load_one_hdct($idbill);
+            $list_cthd = load_all_cthd($idbill);
             include "bill_xacnhan.php";
             break;
+
+
+        case 'xemgiohang':
+            include "giohang.php";
+            break;
+
         case 'deletecard':
             if (isset($_GET['id_card'])) {
                 array_splice($_SESSION['mycard'], $_GET['id_card'], 1);
@@ -176,14 +184,19 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             header('location:index.php?act=xemgiohang');
             break;
 
-        case 'xemgiohang':
-            include "giohang.php";
+        case 'chitiet_donhang':
+            if (isset($_GET['idhd']) && $_GET['idhd'] > 0) {
+                $list_hdct = load_one_hdct($_GET['idhd']);
+                $list_cthd = load_all_cthd($_GET['idhd']); 
+            }
+            include "bill_xacnhan.php";
             break;
 
         case 'thanhtoan':
             include "thanhtoan.php";
             break;
-            //liên hệ 
+
+            // case liên hệ 
         case 'add_lh':
             if (isset($_POST['gui'])) {
 
@@ -194,26 +207,26 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             }
             include "lienhe.php";
             break;
+            // case tin tức 
         case 'tintuc':
             if (isset($_POST['smb'])) {
                 $timkiem = $_POST['keyw'];
             } else {
                 $timkiem = "";
             }
-            $list_news=load_list_news($timkiem);
-            $list_date=load_list_news_byDate();
+            $list_news = load_list_news($timkiem);
+            $list_date = load_list_news_byDate();
             include "tintuc.php";
             break;
 
         case 'chitiettintuc':
             if (isset($_GET['idnews']) && $_GET['idnews'] > 0) {
-                $chitiet_news =load_one_tt($_GET['idnews']);
-                
+                $chitiet_news = load_one_tt($_GET['idnews']);
             }
-            $list=load_list_news_byDate();
+            $list = load_list_news_byDate();
             include "chitiettintuc.php";
             break;
-
+         //case đăng kí đăng nhâp tài khoản 
         case 'dangki_tk':
             if (isset($_POST['dangki'])) {
                 $email = $_POST['email'];
@@ -262,14 +275,13 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                     header('location:index.php?act=edit_tk', true);
                 }
             }
-            
             //đơn hàng của bạn
-            if (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] > 0){
-                $iduser=$_SESSION['user']['id'];
-            }else{
-                $iduser=0;
+            if (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] > 0) {
+                $iduser = $_SESSION['user']['id'];
+            } else {
+                $iduser = 0;
             }
-            $list_donhang=loadAll_hd( $iduser);
+            $list_donhang = loadAll_hd($iduser);
             include "./taikhoan/taikhoan.php";
             break;
 

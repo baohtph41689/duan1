@@ -9,8 +9,8 @@
             <div class="col-12">
                 <div class="breadcrumb_content">
                     <ul>
-                        <li><a href="index.html">home</a></li>
-                        <li>My account</li>
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li>Tài Khoản</li>
                     </ul>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                     <!-- Nav tabs -->
                     <div class="dashboard_tab_button">
                         <ul role="tablist" class="nav flex-column dashboard-list">
-                            <li><a href="#dashboard" data-bs-toggle="tab" class="nav-link active">Bảng điều khiển</a></li>
-                            <li> <a href="#orders" data-bs-toggle="tab" class="nav-link">Đơn hàng</a></li>
+                          
+                            <li> <a href="#orders" data-bs-toggle="tab" class="nav-link active">Đơn hàng</a></li>
                             <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin tài khoản</a></li>
                         </ul>
                     </div>
@@ -37,13 +37,9 @@
                 <div class="col-sm-12 col-md-9 col-lg-9">
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content">
+                        
+
                         <div class="tab-pane fade show active" id="dashboard">
-                            <h3>Dashboard </h3>
-                            <p>Từ trang tổng quan tài khoản của bạn. bạn có thể dễ dàng kiểm tra & xem các đơn đặt hàng gần đây của bạn, quản lý địa chỉ giao hàng và thanh toán và Chỉnh sửa mật khẩu và chi tiết tài khoản của bạn.</p>
-                        </div>
-
-
-                        <div class="tab-pane fade" id="orders">
                             <h3>Orders</h3>
                             <div class="table-responsive">
                                 <table class="table">
@@ -60,19 +56,20 @@
                                         <?php
                                         foreach ($list_donhang as $donhang) {
                                             extract($donhang);
+                                            $link = "index.php?act=chitiet_donhang&idhd=" . $id;
                                             if (isset($donhang['trang_thai']) && $donhang['trang_thai']) {
-                                                $tt=$donhang['trang_thai'];
-                                            }else{
-                                                $tt=0;
+                                                $tt = $donhang['trang_thai'];
+                                            } else {
+                                                $tt = 0;
                                             }
-                                            $ttdh = trangthai_donhang(  $tt);
+                                            $ttdh = trangthai_donhang($tt);
                                         ?>
                                             <tr>
                                                 <td>MHD-0<?= $id ?></td>
                                                 <td><?= $ngay_dat ?></td>
-                                                <td><?=number_format($tong_hd)  ?> <b>for</b> <?= $so_item ?> item </td>
+                                                <td><?= number_format($tong_hd)  ?> <b>for</b> <?= $so_item ?> item </td>
                                                 <td><span class="success"><?= $ttdh ?></span></td>
-                                                <td><a href="cart.html" class="view">view</a></td>
+                                                <td><a href="<?= $link ?>" class="view">view</a></td>
                                             </tr>
                                         <?php
                                         }
@@ -99,7 +96,7 @@
                             </div> -->
 
 
-                        <div class="tab-pane fade" id="account-details">
+                        <div class="tab-pane" id="account-details">
                             <h3>chi tiêt tài khoản </h3>
                             <div class="login">
                                 <div class="login_form_container">

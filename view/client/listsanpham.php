@@ -7,9 +7,9 @@
               <div class="col-12">
                   <div class="breadcrumb_content">
                       <ul>
-                          <li><a href="index.php">home</a></li>
-                          <li>Camera & Video </li>
-                          <li>shop</li>
+                          <li><a href="index.php">trang chủ</a></li>
+                          <li>Danh sách sản phẩm</li>
+                     
                       </ul>
                   </div>
               </div>
@@ -26,25 +26,47 @@
                   <!--sidebar widget start-->
                   <aside class="sidebar_widget">
                       <div class="widget_inner">
-                          <div class="widget_list widget_categories">
-                              <h3>Men</h3>
+                          <div class="widget_list widget_color">
+                              <h3>Tìm sản phẩm theo danh mục</h3>
                               <ul>
-                                  <li class="widget_sub_categories sub_categories1"><a href="javascript:void(0)">Danh mục sản phẩm</a>
+                                
                                       <?php
                                         foreach ($all_dm as $dm_sp) {
                                             extract($dm_sp);
                                             $link = "index.php?act=sanpham&iddm=" . $id;
-                                            echo ' <ul class="widget_dropdown_categories dropdown_categories1">
+                                            echo ' <li>
                                     <li><a href="' . $link . '">' . $ten_dm . '</a></li>
                                     
-                                </ul>';
+                                </li>';
                                         }
                                         ?>
 
-                                  </li>
+                          
 
                               </ul>
                           </div>
+
+                          <div class="widget_list widget_color">
+                              <h3>Tìm sản phẩm theo giá </h3>
+                              <ul>
+                                  <?php
+                                    foreach ($search as $value) {
+                                        extract($value);
+                                    ?>
+                                      <li>
+                                          <a href="index.php?act=sanpham&price=<?=$range_price?>"><?=$range_price?></a>
+                                      </li>
+
+                                  <?php
+                                    }
+
+                                    ?>
+
+
+
+                              </ul>
+                          </div>
+
                       </div>
                   </aside>
                   <!--sidebar widget end-->
@@ -61,16 +83,7 @@
 
                           <button data-role="grid_list" type="button" class="btn-list" data-bs-toggle="tooltip" title="List"></button>
                       </div>
-                      <!-- <div class=" niceselect_option">
-                          <form class="select_option" action="#">
-                              <select name="orderby" id="short">
 
-                                  <option selected value="1">Xắp xếp sản phẩm </option>
-                                  <option value="2">Sort by popularity</option>
-
-                              </select>
-                          </form>
-                      </div> -->
                       <div class="page_amount">
                           <?php
                             foreach ($count_sp as $value) {

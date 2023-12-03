@@ -19,14 +19,13 @@ include './boxleft.php';
       <table class="table table-striped table-valign-middle">
         <thead>
           <tr>
+            <th>ID KM</th>
             <th>tên sản phẩm</th>
             <th>Mã Khuyến Mại</th>
             <th>Tên Khuyến Mại</th>
             <th>Phần Trăm %</th>
             <th>Bắt đầu</th>
             <th>Kết thúc</th>
-            <th>Mô Tả</th>
-            <th>More</th>
           </tr>
         </thead>
         <tbody>
@@ -35,25 +34,36 @@ include './boxleft.php';
             extract($value);
             $linkupdate = "index.php?act=sua_km&idkm=" . $id;
             $linkdelete = "index.php?act=xoa_km&idkm=" . $id;
-            echo '<tr>
-            <td>'.$ten_sp.'</td>
-            <td>'.$ma_km.'</td>
-            <td>'.$ten_km.'</td>
-            <td>'.$phan_tram.'</td>
-            <td>'.$bat_dau.'</td>
-            <td>'.$ket_thuc.'</td>
-            <td style="width: 100px; height: auto;">'.$mo_ta.'</td>
-            <td>
-              <a href="'.$linkupdate.'" class="btn btn-primary" style="margin-right: 30px;">
-                <i class="bi bi-pencil-fill"></i>
-                Edit
-              </a>
-              <a href="'.$linkdelete.'" class="btn btn-primary">
-                <i class="bi bi-trash3-fill"></i>
-                Xóa
-              </a>
-            </td>
-          </tr>';
+          ?>
+            <tr>
+              <td><?= $id ?></td>
+              <td><?= $ten_sp ?></td>
+              <td><?= $ma_km ?></td>
+              <td><?= $ten_km ?></td>
+              <td><?= $phan_tram ?></td>
+              <td><?= $bat_dau ?></td>
+              <td><?= $ket_thuc ?></td>
+              <?php
+              if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+              ?>
+                <td>
+                  <a href="<?= $linkupdate ?>" class="btn btn-primary" style="margin-right: 30px;">
+                    <i class="bi bi-pencil-fill"></i>
+                    Edit
+                  </a>
+                  <a href="<?= $linkdelete ?>" class="btn btn-primary">
+                    <i class="bi bi-trash3-fill"></i>
+                    Xóa
+                  </a>
+                </td>
+              <?php
+              }
+
+              ?>
+
+            </tr>
+
+          <?php
           }
 
           ?>

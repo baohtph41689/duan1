@@ -16,7 +16,6 @@ include './boxleft.php';
             <th>Nội dung</th>
             <th>Sao</th>
             <th>Ngày đánh giá</th>
-            <th>Trạng thái</th>
           </tr>
         </thead>
         <tbody>
@@ -24,23 +23,35 @@ include './boxleft.php';
           foreach ($result as $value) {
             extract($value);
             $linkdelete = "index.php?act=xoa_cmt&idcmt=" . $id;
-            echo '<tr>
-              <td>' . $id . '</td>
-              <td>' . $namekh . '</td>
-              <td>' . $tensp . '</td>
-              <td>' . $noi_dung . '</td>
-              <td>' . $diem_sao . '</td>
-              <td>' . $ngay_cmt . '</td>
-              <td>' . $trang_thai . '</td>
-              <td>
-              <a href="' . $linkdelete . '" class="btn btn-primary">
-                <i class="bi bi-trash3-fill"></i>
-                xóa
-              </a>
-            </td>
-            </tr>';
+          ?>
+            <tr>
+              <td><?= $id ?></td>
+              <td><?= $namekh ?></td>
+              <td><?= $tensp ?></td>
+              <td><?= $noi_dung ?></td>
+              <td><?= $diem_sao ?></td>
+              <td><?= $ngay_cmt ?></td>
+              <?php
+              if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+              ?>
+                <td>
+                  <a href="<?= $linkdelete ?>" class="btn btn-primary">
+                    <i class="bi bi-trash3-fill"></i>
+                    xóa
+                  </a>
+                </td>
+              <?php
+              }
+
+              ?>
+
+            </tr>
+
+
+          <?php
           }
           ?>
+
         </tbody>
       </table>
     </div>

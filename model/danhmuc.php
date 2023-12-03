@@ -1,14 +1,14 @@
 <?php
 //tren trang quan tri 
-function insertdm($tendm, $mota, $trangthai)
+function insertdm($tendm, $mota)
 {
-    $sql="insert into danh_muc(ten_dm, mo_ta, trang_thai) values('$tendm','$mota','$trangthai')";
+    $sql="insert into danh_muc(ten_dm, mo_ta) values('$tendm','$mota')";
     pdo_execute($sql);
 }
 
 function load_list_dm()
 {
-    $sql = "SELECT * FROM danh_muc order by id desc ";
+    $sql = "SELECT * FROM danh_muc  ";
     $listdm = pdo_query($sql);
     return $listdm;
 }
@@ -21,9 +21,9 @@ function load_one_dm($iddm)
     return $danhmuc;
 }
 
-function update_dm($tendm, $id, $mota, $trangthai)
+function update_dm($tendm, $id, $mota)
 {
-    $sql = "update danh_muc set ten_dm='$tendm', mo_ta='$mota', trang_thai='$trangthai' where id=$id";
+    $sql = "update danh_muc set ten_dm='$tendm', mo_ta='$mota', where id=$id";
     pdo_execute($sql);
 }
 

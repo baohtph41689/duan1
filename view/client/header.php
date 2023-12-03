@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -120,7 +119,10 @@
             background-color: #09c6ab;
             color: #fff;
         }
-      
+        .abcd:hover{
+          background-color: #09c6ab;
+
+        }
     </style>
 </head>
 
@@ -139,7 +141,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                             <div class="logo">
-                                <a href="index.php"><img src="../../upload/<?=$all_hethong[0]['logo_cuahang']?>" alt=""></a>
+                                <a href="index.php"><img src="../../upload/<?= $all_hethong[0]['logo_cuahang'] ?>" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9">
@@ -182,7 +184,15 @@
                                             </li>
                                             <!-- <li><a href="about.html">about Us</a></li> -->
                                             <li><a href="index.php?act=add_lh"> Liên hệ</a></li>
-                                            <li><a href="index.php?act=dangnhap_tk"> Đăng Nhập</a></li>
+                                            <?php
+                                            if (!isset($_SESSION['user'])) {
+                                            ?>
+                                                <li><a href="index.php?act=dangnhap_tk"> Đăng Nhập</a></li>
+
+                                            <?php
+                                            }
+                                            ?>
+
 
                                         </ul>
                                     </nav>
@@ -242,7 +252,7 @@
                                                     $tongtien = 0;
                                                     $i = 0;
                                                     $thanhtien = 0;
-                                                  
+
                                                     foreach ($_SESSION['mycard'] as $card) {
                                                         $hinh = $card['hinhsp'];
                                                         $tensp = $card['tensp'];
@@ -257,7 +267,7 @@
                                                         </div>
                                                         <div class="cart_info">
                                                             <a href="#">' . $tensp . '</a>
-                                                            <p>'.$soluong.' x <span> ' . $giasp . ' </span></p>
+                                                            <p>' . $soluong . ' x <span> ' . $giasp . ' </span></p>
                                                         </div>
                                                         <div class="cart_remove">
                                                             <a href="' . $linkdelete . '"><i class="fa fa-times-circle"></i></a>

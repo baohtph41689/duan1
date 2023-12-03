@@ -6,7 +6,14 @@ include './boxleft.php';
         <div class="card-header border-0">
             <h3>Danh sách tin tức </h3>
             <div style="float: right;">
-                <a href="index.php?act=add_news"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a>
+            <?php
+            if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+              ?>
+                 <a href="index.php?act=add_news"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a>
+              <?php
+            }
+            ?>
+             
             </div>
         </div>
         <div class="card-body table-responsive p-0">
@@ -17,9 +24,9 @@ include './boxleft.php';
                         <th>Tiêu đề</th>
                         <th>Hình Ảnh</th>
                         <th>Ngày Đăng</th>
-                        <th>Mô tả</th>
-                        <th>Nội Dung</th>
-                        <th>More</th>
+                        <!-- <th>Mô tả</th> -->
+                        <!-- <th>Nội Dung</th> -->
+
                     </tr>
                 </thead>
                 <tbody>
@@ -34,24 +41,32 @@ include './boxleft.php';
                         } else {
                             $anhtt = "no photo";
                         }
-                        echo '<tr>
-                                <td>' . $id . '</td>
-                        <td style="width: 200px;height: auto;">' . $tieu_de . '</td>
-                        <td>' . $anhtt . '</td>
-                        <td>' . $ngay_dang . '</td>
-                        <td style="width: 200px; height: auto;">' . $mo_ta . '</td>
-                        <td style="width: 200px; height: auto;">' . $noi_dung . '</td>
-                        <td>
-                        <a href="' . $suatintuc . '" class="btn btn-primary" style="margin-right: 30px;">
-                        <i class="bi bi-pencil-fill"></i>
-                        Edit
-                        </a>
-                        <a href="' . $xoatintuc . '" class="btn btn-primary">
-                        <i class="bi bi-trash3-fill"></i>
-                         Xóa
-                        </a>
-                        </td>      
-                        </tr>';
+                    ?>
+                        <tr>
+                            <td><?= $id ?></td>
+                            <td style="width: 200px;height: auto;"><?= $tieu_de ?></td>
+                            <td><?= $anhtt ?></td>
+                            <td><?= $ngay_dang ?></td>
+                            <?php
+                            if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
+                            ?>
+                                <td>
+                                    <a href="<?= $suatintuc ?>" class="btn btn-primary" style="margin-right: 30px;">
+                                        <i class="bi bi-pencil-fill"></i>
+                                        Edit
+                                    </a>
+                                    <a href="<?= $xoatintuc ?>" class="btn btn-primary">
+                                        <i class="bi bi-trash3-fill"></i>
+                                        Xóa
+                                    </a>
+                                </td>
+                            <?php
+                            }
+
+                            ?>
+
+                        </tr>
+                    <?php
                     }
                     ?>
                 </tbody>

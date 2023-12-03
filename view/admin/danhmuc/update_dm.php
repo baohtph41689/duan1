@@ -24,14 +24,6 @@ if (is_array($danhmuc)) {
             <label>Mô tả</label>
             <textarea class="form-control" rows="3" name="mota"><?php if (isset($mo_ta) && !empty($mo_ta)) echo $mo_ta ?></textarea>
           </div>
-          <div class="form-group">
-            <label>Trạng thái</label>
-            <select class="form-control" name="trangthai">
-              <option><?php if (isset($trang_thai) && !empty($trang_thai)) echo $trang_thai ?></option>
-              <option value="">Hiển thị</option>
-              <option value="">Ẩn</option>
-            </select>
-          </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
