@@ -15,6 +15,7 @@
 
     <!-- CSS 
     ========================= -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <!--bootstrap min css-->
     <link rel="stylesheet" href="../../thu_vien/asset/css/bootstrap.min.css">
     <!--owl carousel min css-->
@@ -44,6 +45,12 @@
     <!--modernizr min js here-->
     <script src="../../thu_vien/asset/js/vendor/modernizr-3.7.1.min.js"></script>
     <style>
+        .momo input{
+            width:150px;
+            background-color: lightcoral;
+            color: #ffffff;
+        }
+
         .quenmk:hover {
             color: #252525;
             font-weight: 700;

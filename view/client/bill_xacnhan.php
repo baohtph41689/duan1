@@ -62,7 +62,7 @@
                                         $tongtien = $card['tong_hd'];
                                 ?>
                                       <tr>
-                                          <td> <?= $tensp ?><strong> × <?= $soluong ?></strong></td>
+                                          <td> <?= $tensp?><strong> × <?= $soluong ?></strong></td>
                                           <td><?= number_format($thanhtien) ?></td>
                                       </tr>
                               <?php
@@ -75,23 +75,6 @@
                                   <th>Tổng tiền</th>
                                   <td><?= number_format($tongtien) ?></td>
                               </tr>
-
-                              <?php
-                                if (isset($_SESSION['khuyenmai']['phan_tram']) and $_SESSION['khuyenmai']['phan_tram'] != "") {
-                                ?>
-                                  <tr>
-                                      <input type="hidden" name="idkm" value="<?= $_SESSION['khuyenmai']['id'] ?>">
-                                      <th> Khuyến mại:<?php echo $_SESSION['khuyenmai']['phan_tram'] ?>(%)</th>
-                                      <td><strong><?= number_format($tongtien * $_SESSION['khuyenmai']['phan_tram'] / 100) ?></strong></td>
-                                  </tr>
-                                  <tr class="order_total">
-                                      <th>Còn Lại</th>
-                                      <td><strong><?= number_format($tongtien - ($tongtien * $_SESSION['khuyenmai']['phan_tram']) / 100) ?></strong></td>
-                                  </tr>
-                              <?php
-                                }
-                                ?>
-
                           </tfoot>
                       </table>
                   </div>

@@ -23,7 +23,7 @@ $all_hethong = loadall_hethong();
 $all_news = loadall_tintuc();
 $all_baner = loadall_banner();
 $all_dm = load_list_dm();
-$all_sp = load_list_sp("", 0,0);
+$all_sp = load_list_sp("", 0, 0);
 $sp_noibat = load_list_sp_noibat();
 include "header.php";
 if (isset($_GET['act']) && ($_GET['act'] != "")) {
@@ -41,13 +41,14 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             } else {
                 $iddm = "";
             }
-            $search=price();
+
+            $search = price();
             $all_sp = load_list_sp($timkiem, $iddm);
             $all_dm = load_list_dm();
             include "listsanpham.php";
             break;
         case 'sanphamct':
-            
+
             if (isset($_POST['binhluan']) && $_POST['binhluan']) {
                 $iduser = $_SESSION['user']['id'];
                 $date = date('Y-m-d');
@@ -56,6 +57,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                 insert_cmt($idpro, $iduser, $noidung, $date);
             }
             if (isset($_GET['idsp']) && $_GET['idsp'] > 0) {
+                update_view($_GET['idsp']);
                 $chitiet_sp = load_one_sp($_GET['idsp']);
                 $sp_cungloai = load_sp_cungloai($_GET['idsp'], $chitiet_sp['dm_id']);
                 $cmt = load_cmt_sp($_GET['idsp']);
@@ -152,15 +154,15 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                 $tongdonhang = tongdonhang();
                 //tao hóa đơn
                 $idbill = inser_bill($id_km, $iduser, $tongdonhang, $ngaydathang, $name, $addr, $sdt, $email, $ghichu, $pttt);
-
                 // tạo chi tiết hóa đơn (with  $_SESSION['mycard'] & idbill) 
-                foreach ($_SESSION['mycard'] as $cart) {
+                foreach ($_SESSION['mycard'] as $card) {
                     $idsp = $card['id'];
                     $soluong = $card['soluong'];
                     $giasp = $card['giasp'];
                     $thanhtien = $card['giasp'] * $card['soluong'];
                     insert_cart($soluong, $giasp, $thanhtien, $idsp, $idbill);
                 }
+
                 //xoa $_SESSION['mycard'] sau khi tạo xong đơn hàng
                 $_SESSION['mycard'] = [];
                 $_SESSION['khuyenmai'] = [];
@@ -170,6 +172,64 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             include "bill_xacnhan.php";
             break;
 
+        case 'conggiohang':
+            if (isset($_GET['idsp'])) {
+                $idsp = $_GET['idsp'];
+                foreach ($_SESSION['mycard'] as $card) {
+                    $id = $card['id'];
+                    $hinh = $card['hinhsp'];
+                    $tensp = $card['tensp'];
+                    $soluong = $card['soluong'];
+                    $giasp = $card['giasp'];
+                    $sizesp = $card['size'];
+                    $mausp = $card['mausp'];
+                    if ($idsp != $id) {
+                        $soluong = $card['soluong'];
+                        $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluong, 'giasp' => $giasp);
+                        $_SESSION['mycard'] = $product;
+                    } else {
+                        $soluongnew = $soluong + 1;
+                        if ($card['soluong'] < 9) {
+                            $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluongnew, 'giasp' => $giasp);
+                        } else {
+                            $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluong, 'giasp' => $giasp);
+                        }
+                        $_SESSION['mycard'] = $product;
+                    }
+                }
+            }
+            include "giohang.php";
+            break;
+
+        case 'trugiohang':
+            if (isset($_GET['idsp'])) {
+                $idsp = $_GET['idsp'];
+                foreach ($_SESSION['mycard'] as $card) {
+                    $id = $card['id'];
+                    $hinh = $card['hinhsp'];
+                    $tensp = $card['tensp'];
+                    $soluong = $card['soluong'];
+                    $giasp = $card['giasp'];
+                    $sizesp = $card['size'];
+                    $mausp = $card['mausp'];
+                    if ($idsp != $id) {
+                        $soluong = $card['soluong'];
+                        $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluong, 'giasp' => $giasp);
+                        $_SESSION['mycard'] = $product;
+                    } else {
+                        $soluongnew = $soluong - 1;
+                        $soluong = $soluongnew;
+                        if ($soluong > 1) {
+                            $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluong, 'giasp' => $giasp);
+                        } else {
+                            $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluong, 'giasp' => $giasp);
+                        }
+                        $_SESSION['mycard'] = $product;
+                    }
+                }
+            }
+            include "giohang.php";
+            break;
 
         case 'xemgiohang':
             include "giohang.php";
@@ -187,7 +247,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
         case 'chitiet_donhang':
             if (isset($_GET['idhd']) && $_GET['idhd'] > 0) {
                 $list_hdct = load_one_hdct($_GET['idhd']);
-                $list_cthd = load_all_cthd($_GET['idhd']); 
+                $list_cthd = load_all_cthd($_GET['idhd']);
             }
             include "bill_xacnhan.php";
             break;
@@ -195,6 +255,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
         case 'thanhtoan':
             include "thanhtoan.php";
             break;
+
 
             // case liên hệ 
         case 'add_lh':
@@ -226,7 +287,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             $list = load_list_news_byDate();
             include "chitiettintuc.php";
             break;
-         //case đăng kí đăng nhâp tài khoản 
+            //case đăng kí đăng nhâp tài khoản 
         case 'dangki_tk':
             if (isset($_POST['dangki'])) {
                 $email = $_POST['email'];
@@ -285,9 +346,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             include "./taikhoan/taikhoan.php";
             break;
 
-            break;
         case 'quen_mk':
-
             if (isset($_POST['gui']) && $_POST['gui']) {
                 $email = $_POST['email'];
                 $check = check_email($email);

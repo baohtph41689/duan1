@@ -5,49 +5,49 @@ function insertsp($tensp, $img_name, $giasp, $size, $mau, $ngaynhap, $mota, $tra
     pdo_execute($sql);
 }
 
-function price(){
-    $sql="SELECT * FROM price_search where status=1";
-    $result=pdo_query($sql);
+function price()
+{
+    $sql = "SELECT * FROM price_search where status=1";
+    $result = pdo_query($sql);
     return $result;
 }
 
 
 function load_list_sp($keyw, $iddm)
 {
-    $sql = "select * from sanpham where 1 ";
+
+    $sql = "select sanpham.* from sanpham where 1 ";
     if ($keyw != "") {
         $sql .= " AND ten_sp LIKE '%" . $keyw . "%'";
     }
     if ($iddm > 0) {
         $sql .= " AND id_dm = " . $iddm . "";
     }
-   
-        if (isset($_GET['price'])) {
-            $price = $_GET['price'];
-            //dùng để tách giấu và giá tiền thành những chữ con trả về 1 mảng từ string ban đầu
-           $range = preg_split('[\s]',$price);
-    
-       
-           //$range chứa các chữ con tương ứng(còn dc gọi là 1 mảng )
-          $from=0;
-          $to=0;
-          if ($range[0]=="Từ") {
-            $from=$range[1];
-          }else {
-            $range1=preg_split('[\-]',$range[0]);
-            $from=$range1[0];
-            $to=$range1[1];
-          }
-          $from*=1000;
-          $to*=1000;
-          if ($to==0) {
-            $sql .= " AND gia_sp>=$from";
-          }else {
-            $sql .= " AND gia_sp>=$from and gia_sp<=$to";
-          }
 
+    if (isset($_GET['price'])) {
+        $price = $_GET['price'];
+        //dùng để tách giấu và giá tiền thành những chữ con trả về 1 mảng từ string ban đầu
+        $range = preg_split('[\s]', $price);
+
+
+        //$range chứa các chữ con tương ứng(còn dc gọi là 1 mảng )
+        $from = 0;
+        $to = 0;
+        if ($range[0] == "Từ") {
+            $from = $range[1];
+        } else {
+            $range1 = preg_split('[\-]', $range[0]);
+            $from = $range1[0];
+            $to = $range1[1];
         }
-    
+        $from *= 1000;
+        $to *= 1000;
+        if ($to == 0) {
+            $sql .= " AND gia_sp>=$from";
+        } else {
+            $sql .= " AND gia_sp>=$from and gia_sp<=$to";
+        }
+    }
     $sql .= " order by sanpham.id desc ";
     $listsp = pdo_query($sql);
     return $listsp;
@@ -98,4 +98,16 @@ function load_sl_sp()
     $sql = "select count(sanpham.id) as sl from sanpham ";
     $count_sp = pdo_query($sql);
     return $count_sp;
+}
+//update luot xem 
+function update_view($idsp)
+{
+    $sql = "update sanpham set luot_xem = luot_xem + 1 where id=" . $idsp;
+    pdo_execute($sql);
+}
+
+//phân trang 
+function phantrang_sp()
+{
+    $sp_of_onepage = 0;
 }

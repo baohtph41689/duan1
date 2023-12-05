@@ -1,7 +1,6 @@
 <?php
 include './boxleft.php';
 extract($result);
-var_dump($result);
 $ttdh = trangthai_donhang($trang_thai);
 ?>
 <!-- Content Wrapper. Contains page content -->

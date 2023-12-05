@@ -70,6 +70,9 @@
                                       <textarea id="order_note" placeholder="Ghi chú..." name="ghichu"></textarea>
                                   </div>
                               </div>
+                              <div class="card-body1">
+                                  <b>*Vui lòng kiểm tra lại đơn hàng và địa chỉ giao hàng của bạn! Xin cám ơn.</b>
+                              </div>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6">
@@ -132,23 +135,24 @@
                               </table>
                           </div>
 
-                          <div class="card-body1">
-                              <b>*Vui lòng kiểm tra lại đơn hàng và địa chỉ giao hàng của bạn! Xin cám ơn.</b>
-                          </div>
+
                           <?php
-                            if (isset($_SESSION['mycard']) && $_SESSION['mycard']!=[]) {
+                            if (isset($_SESSION['mycard']) && $_SESSION['mycard'] != []) {
                             ?>
                               <div class="panel-default">
+                                  <h4>Phương thức thanh toán</h4>
                                   <label><input id="payment_defult" type="radio" value="1" name="pttt"> Thanh toán khi nhận hàng</label>
+                                  <!-- <label><input id="payment_defult" type="radio" value="2" name="pttt"> Thanh toán momo</label> -->
                               </div>
+                              <!-- <div onclick="handlePayment()">Thanh toan</div> -->
                               <div class="order_button">
                                   <input style="width: 150px;border: 0,5px solid black;margin-left:404px ;" class="dangnhap" type="submit" name="dathang" value="Hoàn tất "></input>
                               </div>
                           <?php
-                            }else {
+                            } else {
                             ?>
-                             <p style="color: red;"> * Bạn chưa chọn sản phẩm để thanh toán !</p>
-                            <?php
+                              <p style="color: red;"> * Bạn chưa chọn sản phẩm để thanh toán !</p>
+                          <?php
                             }
 
                             ?>

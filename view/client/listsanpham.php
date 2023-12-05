@@ -168,9 +168,10 @@
                   <div class="shop_toolbar t_bottom">
                       <div class="pagination">
                           <ul>
-                              <li class="current">1</li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
+                        
+                              <li class="current"><a href="index.php?act=sanpham&per_page=9&page=1">1</a></li>
+                              <li><a href="index.php?act=sanpham&per_page=9&page=2">2</a></li>
+                              <li><a href="index.php?act=sanpham&per_page=9&page=3">3</a></li>
                               <li class="next"><a href="#">next</a></li>
                               <li><a href="#">>></a></li>
                           </ul>

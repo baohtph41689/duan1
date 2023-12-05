@@ -46,6 +46,7 @@
                                         $thanhtien = 0;
                                       
                                         foreach ($_SESSION['mycard'] as $card) {
+                                            $id=$card['id'];
                                             $hinh = $card['hinhsp'];
                                             $tensp = $card['tensp'];
                                             $soluong = $card['soluong'];
@@ -73,8 +74,9 @@
                                                 <td class="product-price"><?= number_format($giasp) ?><b>đ</b></td>
 
                                                 <td class="product_quantity">
-                                                    <label>Số lượng</label>
-                                                    <input class="input-increase" name="soluong" min="1" max="100" value="<?= $soluong ?>" type="text">
+                                                    <a href="index.php?act=conggiohang&idsp=<?=$id?>"><i class="bi bi-plus"></i></a>
+                                                    <?= $soluong ?>
+                                                    <a href="index.php?act=trugiohang&idsp=<?=$id?>"><i class="bi bi-dash"></i></a>
                                                 </td>
                                                 <td class="product_total"><?= number_format($thanhtien) ?><b>đ</b></td>
 
@@ -122,7 +124,7 @@
                                         <input type="text" name="makm" placeholder="Mã khuyến mại...">
                                     </p>
                                     <div>
-                                        <input class="dangnhap" type="submit" name="guikm" value="Gửi">
+                                        <input class="dangnhap" type="submit" name="guikm" value="Xác nhận">
                                     </div>
                                     <?php
                                     if (isset($thongbao_email) && ($thongbao_email) != "") {
