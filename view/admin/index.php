@@ -622,15 +622,20 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                 break;
             case "update_trangthai":
                 if (isset($_POST['capnhap_hd']) && $_POST['capnhap_hd']) {
-                    
+
                     $idhd = $_POST['idhd'];
                     $trang_thai = $_POST["trangthai"];
-                    update_trangthai($idhd,$trang_thai);
+                    update_trangthai($idhd, $trang_thai);
                     $thongbao = "cap nhat thanh cong";
                 }
+                header('location:index.php?act=xem_update_trangthai');
+                include "donhang/list_donhang.php";
+                break;
+            case "xem_update_trangthai":
                 $list = load_list_hoadon();
                 include "donhang/list_donhang.php";
                 break;
+
 
             case "thoat":
                 session_unset();

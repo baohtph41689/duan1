@@ -181,9 +181,9 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                         $_SESSION['mycard'] = $product;
                     } else {
                         $soluongnew = $soluong - 1;
-                        $soluong = $soluongnew;
+                       
                         if ($soluong > 1) {
-                            $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluong, 'giasp' => $giasp);
+                            $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluongnew, 'giasp' => $giasp);
                         } else {
                             $product[] = array('id' => $id, 'tensp' => $tensp, 'hinhsp' => $hinh, 'mausp' => $mausp, 'size' => $sizesp, 'soluong' => $soluong, 'giasp' => $giasp);
                         }
@@ -244,11 +244,10 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
 
         case 'huydonhang':
             if (isset($_GET['idhd']) && $_GET['idhd'] > 0){
-             
                 update_trangthai($_GET['idhd'],4);
-                var_dump("dsfsdfsdfsdfs");
             }
             $list_donhang = loadAll_hd($_SESSION['user']['id']);
+            header('location:index.php?act=edit_tk');
             include "taikhoan/taikhoan.php";
             break;
 

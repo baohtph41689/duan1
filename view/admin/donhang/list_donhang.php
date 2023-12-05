@@ -25,7 +25,6 @@ include 'boxleft.php';
                     <?php
                     foreach ($list as $value) {
                         extract($value);
-                        var_dump($value['trang_thai']);
                         $ttdh = trangthai_donhang($trang_thai);
                         $link_cthd = "index.php?act=chitiet_donhang&idhd=" . $id;
                         $linkdelete = "index.php?act=xoa_dh&idhd=" . $id;
