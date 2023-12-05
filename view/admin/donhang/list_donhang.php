@@ -25,6 +25,7 @@ include 'boxleft.php';
                     <?php
                     foreach ($list as $value) {
                         extract($value);
+                        var_dump($value['trang_thai']);
                         $ttdh = trangthai_donhang($trang_thai);
                         $link_cthd = "index.php?act=chitiet_donhang&idhd=" . $id;
                         $linkdelete = "index.php?act=xoa_dh&idhd=" . $id;
@@ -50,22 +51,30 @@ include 'boxleft.php';
                                         <i class="bi bi-pencil-fill"></i>
                                         Sửa
                                     </a>
-                                    <a href="<?= $linkdelete ?>" class="btn btn-primary">
-                                        <i class="bi bi-trash3-fill"></i>
-                                        xóa
-                                    </a>
+                                    <?php
+                                    if (isset($value['trang_thai']) && $value['trang_thai'] == 4) {
+                                       
+                                    ?>
+                                        <a href="<?= $linkdelete ?>" class="btn btn-primary">
+                                            <i class="bi bi-trash3-fill"></i>
+                                            xóa
+                                        </a>
+                                    <?php
+                                    }
+                                    ?>
+
                                 </td>
 
                             <?php
                             } else {
-                                ?>
-                                  <td>
+                            ?>
+                                <td>
                                     <a href="<?= $link_cthd ?>" class="btn btn-primary">
 
                                         Chi tiết
                                     </a>
-                                  </td>
-                                <?php
+                                </td>
+                            <?php
                                 # code...
                             }
                             ?>

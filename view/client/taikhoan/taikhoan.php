@@ -28,7 +28,7 @@
                     <!-- Nav tabs -->
                     <div class="dashboard_tab_button">
                         <ul role="tablist" class="nav flex-column dashboard-list">
-                          
+
                             <li> <a href="#orders" data-bs-toggle="tab" class="nav-link active">Đơn hàng</a></li>
                             <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin tài khoản</a></li>
                         </ul>
@@ -37,7 +37,7 @@
                 <div class="col-sm-12 col-md-9 col-lg-9">
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content">
-                        
+
 
                         <div class="tab-pane fade show active" id="dashboard">
                             <h3>Orders</h3>
@@ -45,11 +45,14 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                          
                                             <th>Đơn hàng</th>
                                             <th>Ngày đặt</th>
                                             <th>Tổng đơn</th>
                                             <th>Trạng thái</th>
                                             <th>Chi tiết</th>
+                                            <th>Cập nhật</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,6 +60,8 @@
                                         foreach ($list_donhang as $donhang) {
                                             extract($donhang);
                                             $link = "index.php?act=chitiet_donhang&idhd=" . $id;
+                                            $links = "index.php?act=huydonhang&idhd=" . $id;
+
                                             if (isset($donhang['trang_thai']) && $donhang['trang_thai']) {
                                                 $tt = $donhang['trang_thai'];
                                             } else {
@@ -64,36 +69,39 @@
                                             }
                                             $ttdh = trangthai_donhang($tt);
                                         ?>
+                                        
                                             <tr>
+                                               
+                                               
                                                 <td>MHD-0<?= $id ?></td>
                                                 <td><?= $ngay_dat ?></td>
                                                 <td><?= number_format($tong_hd)  ?> <b>for</b> <?= $so_item ?> item </td>
                                                 <td><span class="success"><?= $ttdh ?></span></td>
                                                 <td><a href="<?= $link ?>" class="view">view</a></td>
+                                                <?php
+                                                if (isset($donhang['trang_thai']) && $donhang['trang_thai']!=2 && $donhang['trang_thai']!=3) {
+                                                ?>
+                                                   <td><a href="<?= $links ?>"><button>Hủy</button></a></td>  
+                                                <?php
+                                                }
+                                                ?>
+
+                                               
+
                                             </tr>
+                                         
                                         <?php
                                         }
                                         ?>
+                                      
                                     </tbody>
+                                   
                                 </table>
+                               
                             </div>
                         </div>
 
-                        <!-- <div class="tab-pane" id="address">
-                               <p>The following addresses will be used on the checkout page by default.</p>
-                                <h4 class="billing-address">Billing address</h4>
-                                <a href="#" class="view">Edit</a>
-                                <p><strong>Bobby Jackson</strong></p>
-                                <address>
-                                    House #15<br>
-                                    Road #1<br>
-                                    Block #C <br>
-                                    Banasree <br>
-                                    Dhaka <br>
-                                    1212
-                                </address>
-                                <p>Bangladesh</p>   
-                            </div> -->
+
 
 
                         <div class="tab-pane" id="account-details">

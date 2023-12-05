@@ -21,6 +21,8 @@ $ttdh = trangthai_donhang($trang_thai);
                     <option value="1">Đang chuẩn bị</option>
                     <option value="2">Đang giao hang </option>
                     <option value="3">Hoàn thành</option>
+                   
+                    
                   </select>
                 </div>
                 <!-- /.card-body -->

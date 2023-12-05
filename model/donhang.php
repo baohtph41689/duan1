@@ -2,7 +2,7 @@
 
 function load_list_hoadon()
 {
-    $sql = "select hoa_don.*,count(chitiet_hd.so_luong) as sodon from hoa_don
+    $sql = "select hoa_don.*,hoa_don.trang_thai,count(chitiet_hd.so_luong) as sodon from hoa_don
     join chitiet_hd on hoa_don.id=chitiet_hd.id_hd
     GROUP by hoa_don.id
     order by hoa_don.id desc";
@@ -10,12 +10,14 @@ function load_list_hoadon()
     return $list;
 }
 
-function delete_donhang($id){
+function delete_donhang($id)
+{
     $sql = "delete from hoa_don where id=" . $id;
-     pdo_execute($sql);
+    pdo_execute($sql);
 }
 
-function update_trangthai($id,$trangthai){
+function update_trangthai($id, $trangthai)
+{
     $sql = "UPDATE hoa_don SET trang_thai='$trangthai' WHERE id=$id;";
     pdo_execute($sql);
 }
@@ -104,8 +106,14 @@ function trangthai_donhang($trangthai)
         case '3':
             $stt = "Hoàn tất giao hàng";
             break;
-      
+        case '4':
+            $stt = "Hủy đơn hàng";
+            break;
     }
     return $stt;
 }
-?>
+
+
+function update_tt($id)
+{
+}

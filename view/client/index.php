@@ -89,7 +89,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             include "giohang.php";
             break;
 
-            //
+            //thêm giỏ hàng - thanh toán - hóa đơn -chi tiết hóa đơn
         case 'giohang':
 
             if ((isset($_POST['addcard']))) {
@@ -132,46 +132,9 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             header('location:index.php?act=xemgiohang');
             break;
 
-        case 'ht_donhang':
-            if (isset($_POST['dathang']) && $_POST['dathang']) {
-                if (isset($_SESSION['user']) && $_SESSION['user'] != "") {
-                    $iduser = $_SESSION['user']['id'];
-                } else {
-                    $iduser = "";
-                }
-                $name = $_POST['name'];
-                $addr = $_POST['addr'];
-                $sdt = $_POST['sdt'];
-                $email = $_POST['email'];
-                $ghichu = $_POST['ghichu'];
-                $pttt = $_POST['pttt'];
-                if ($_SESSION['khuyenmai'] != []) {
-                    $id_km = $_SESSION['khuyenmai']['id'];
-                } else {
-                    $id_km = "";
-                }
-                $ngaydathang = date('Y-m-d');
-                $tongdonhang = tongdonhang();
-                //tao hóa đơn
-                $idbill = inser_bill($id_km, $iduser, $tongdonhang, $ngaydathang, $name, $addr, $sdt, $email, $ghichu, $pttt);
-                // tạo chi tiết hóa đơn (with  $_SESSION['mycard'] & idbill) 
-                foreach ($_SESSION['mycard'] as $card) {
-                    $idsp = $card['id'];
-                    $soluong = $card['soluong'];
-                    $giasp = $card['giasp'];
-                    $thanhtien = $card['giasp'] * $card['soluong'];
-                    insert_cart($soluong, $giasp, $thanhtien, $idsp, $idbill);
-                }
-
-                //xoa $_SESSION['mycard'] sau khi tạo xong đơn hàng
-                $_SESSION['mycard'] = [];
-                $_SESSION['khuyenmai'] = [];
-            }
-            $list_hdct = load_one_hdct($idbill);
-            $list_cthd = load_all_cthd($idbill);
-            include "bill_xacnhan.php";
+        case 'xemgiohang':
+            include "giohang.php";
             break;
-
         case 'conggiohang':
             if (isset($_GET['idsp'])) {
                 $idsp = $_GET['idsp'];
@@ -231,8 +194,62 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             include "giohang.php";
             break;
 
-        case 'xemgiohang':
-            include "giohang.php";
+        case 'ht_donhang':
+            if (isset($_POST['dathang']) && $_POST['dathang']) {
+                if (isset($_SESSION['user']) && $_SESSION['user'] != "") {
+                    $iduser = $_SESSION['user']['id'];
+                } else {
+                    $iduser = "";
+                }
+                $name = $_POST['name'];
+                $addr = $_POST['addr'];
+                $sdt = $_POST['sdt'];
+                $email = $_POST['email'];
+                $ghichu = $_POST['ghichu'];
+                $pttt = $_POST['pttt'];
+                if ($_SESSION['khuyenmai'] != []) {
+                    $id_km = $_SESSION['khuyenmai']['id'];
+                } else {
+                    $id_km = "";
+                }
+                $ngaydathang = date('Y-m-d');
+                $tongdonhang = tongdonhang();
+                //tao hóa đơn
+                $idbill = inser_bill($id_km, $iduser, $tongdonhang, $ngaydathang, $name, $addr, $sdt, $email, $ghichu, $pttt);
+                // tạo chi tiết hóa đơn (with  $_SESSION['mycard'] & idbill) 
+                foreach ($_SESSION['mycard'] as $card) {
+                    $idsp = $card['id'];
+                    $soluong = $card['soluong'];
+                    $giasp = $card['giasp'];
+                    $thanhtien = $card['giasp'] * $card['soluong'];
+                    insert_cart($soluong, $giasp, $thanhtien, $idsp, $idbill);
+                }
+
+                //xoa $_SESSION['mycard'] sau khi tạo xong đơn hàng
+                $_SESSION['mycard'] = [];
+                $_SESSION['khuyenmai'] = [];
+            }
+            $list_hdct = load_one_hdct($idbill);
+            $list_cthd = load_all_cthd($idbill);
+            include "bill_xacnhan.php";
+            break;
+
+        case 'chitiet_donhang':
+            if (isset($_GET['idhd']) && $_GET['idhd'] > 0) {
+                $list_hdct = load_one_hdct($_GET['idhd']);
+                $list_cthd = load_all_cthd($_GET['idhd']);
+            }
+            include "bill_xacnhan.php";
+            break;
+
+        case 'huydonhang':
+            if (isset($_GET['idhd']) && $_GET['idhd'] > 0){
+             
+                update_trangthai($_GET['idhd'],4);
+                var_dump("dsfsdfsdfsdfs");
+            }
+            $list_donhang = loadAll_hd($_SESSION['user']['id']);
+            include "taikhoan/taikhoan.php";
             break;
 
         case 'deletecard':
@@ -244,13 +261,6 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             header('location:index.php?act=xemgiohang');
             break;
 
-        case 'chitiet_donhang':
-            if (isset($_GET['idhd']) && $_GET['idhd'] > 0) {
-                $list_hdct = load_one_hdct($_GET['idhd']);
-                $list_cthd = load_all_cthd($_GET['idhd']);
-            }
-            include "bill_xacnhan.php";
-            break;
 
         case 'thanhtoan':
             include "thanhtoan.php";
@@ -287,7 +297,8 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             $list = load_list_news_byDate();
             include "chitiettintuc.php";
             break;
-            //case đăng kí đăng nhâp tài khoản 
+
+            //case đăng kí đăng nhâp edit tài khoản 
         case 'dangki_tk':
             if (isset($_POST['dangki'])) {
                 $email = $_POST['email'];
@@ -336,7 +347,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                     header('location:index.php?act=edit_tk', true);
                 }
             }
-            //đơn hàng của bạn
+            //load đơn hàng
             if (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] > 0) {
                 $iduser = $_SESSION['user']['id'];
             } else {
