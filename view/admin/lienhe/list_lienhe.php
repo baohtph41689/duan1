@@ -13,7 +13,7 @@ include 'boxleft.php';
             <th>ID</th>
             <th>Tên Khách hàng</th>
             <th>Nội Dung</th>
-            <!-- <th>Trạng Thái </th> -->
+            <th>Trạng Thái </th>
         
           </tr>
         </thead>
@@ -23,11 +23,18 @@ include 'boxleft.php';
             extract($value);
             $linkupdate = "index.php?act=sua_lh&idlh=" . $id;
             $linkdelete = "index.php?act=xoa_lh&idlh=" . $id;
+            if (isset($value['trang_thai']) && $value['trang_thai']) {
+              $tt = $value['trang_thai'];
+          } else {
+              $tt = 0;
+          }
+          $ttlh = status_contact($tt);
           ?>
             <tr>
               <td><?= $id ?></td>
               <td><?= $ho_ten ?></td>
               <td><?= $noi_dung ?></td>
+              <td><?= $ttlh ?></td>
               <?php
               if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
               ?>

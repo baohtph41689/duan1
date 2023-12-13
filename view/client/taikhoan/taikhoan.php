@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
     <div class="container">
@@ -18,7 +14,6 @@
     </div>
 </div>
 <!--breadcrumbs area end-->
-
 <!-- my account start  -->
 <section class="main_content_area">
     <div class="container">
@@ -28,7 +23,6 @@
                     <!-- Nav tabs -->
                     <div class="dashboard_tab_button">
                         <ul role="tablist" class="nav flex-column dashboard-list">
-
                             <li> <a href="#orders" data-bs-toggle="tab" class="nav-link active">Đơn hàng</a></li>
                             <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin tài khoản</a></li>
                         </ul>
@@ -37,22 +31,19 @@
                 <div class="col-sm-12 col-md-9 col-lg-9">
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content">
-
-
                         <div class="tab-pane fade show active" id="dashboard">
-                            <h3>Orders</h3>
+                            <h3>Lịch sử đơn hàng</h3>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                          
                                             <th>Đơn hàng</th>
                                             <th>Ngày đặt</th>
                                             <th>Tổng đơn</th>
                                             <th>Trạng thái</th>
                                             <th>Chi tiết</th>
-                                            <th>Cập nhật</th>
-
+                                            <th>More</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,7 +52,7 @@
                                             extract($donhang);
                                             $link = "index.php?act=chitiet_donhang&idhd=" . $id;
                                             $links = "index.php?act=huydonhang&idhd=" . $id;
-
+                                            $link_final = "index.php?act=nhanhang&idhd=" . $id;
                                             if (isset($donhang['trang_thai']) && $donhang['trang_thai']) {
                                                 $tt = $donhang['trang_thai'];
                                             } else {
@@ -69,38 +60,35 @@
                                             }
                                             $ttdh = trangthai_donhang($tt);
                                         ?>
-                                        
                                             <tr>
-                                               
-                                               
                                                 <td>MHD-0<?= $id ?></td>
                                                 <td><?= $ngay_dat ?></td>
                                                 <td><?= number_format($tong_hd)  ?> <b>for</b> <?= $so_item ?> item </td>
                                                 <td><span class="success"><?= $ttdh ?></span></td>
                                                 <td><a href="<?= $link ?>" class="view">view</a></td>
                                                 <?php
-                                                if (isset($donhang['trang_thai']) && $donhang['trang_thai']!=2 && $donhang['trang_thai']!=3) {
+                                                if (isset($donhang['trang_thai']) && $donhang['trang_thai'] != 2 && $donhang['trang_thai'] != 3 && $donhang['trang_thai'] != 4 && $donhang['trang_thai'] != 5) {
                                                 ?>
-                                                   <td><a href="<?= $links ?>"><button>Hủy</button></a></td>  
+                                                    <td><a href="<?= $links ?>"><button>Hủy</button></a></td>
                                                 <?php
                                                 }
                                                 ?>
+                                                <!-- nhanhang -->
+                                                <?php
+                                                if (isset($donhang['trang_thai']) && $donhang['trang_thai'] !=0 && $donhang['trang_thai'] !=1) {
+                                                ?>
+                                                    <td><a href="<?= $link_final ?>">Đã nhận</a></td>
+                                                <?php
+                                                }
+                                                ?>                                            
                                             </tr>
-                                         
                                         <?php
                                         }
                                         ?>
-                                      
                                     </tbody>
-                                   
                                 </table>
-                               
                             </div>
                         </div>
-
-
-
-
                         <div class="tab-pane" id="account-details">
                             <h3>chi tiêt tài khoản </h3>
                             <div class="login">
@@ -131,8 +119,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -140,7 +126,6 @@
     </div>
 </section>
 <!-- my account end   -->
-
 <!--brand area start-->
 <div class="brand_area color_five">
     <div class="container">

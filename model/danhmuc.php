@@ -23,8 +23,8 @@ function load_one_dm($iddm)
 
 function update_dm($tendm, $id, $mota)
 {
-    $sql = "update danh_muc set ten_dm='$tendm', mo_ta='$mota', where id=$id";
-    pdo_execute($sql);
+  $sql="UPDATE danh_muc SET ten_dm='$tendm', mo_ta='$mota' WHERE id='$id'";
+  pdo_execute($sql);
 }
 
 function delete_dm($id)

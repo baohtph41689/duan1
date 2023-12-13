@@ -20,10 +20,8 @@
     <?php
     if (isset($list_hdct) and is_array($list_hdct)) {
         extract($list_hdct);
-    }
-    
+    }   
     ?>
-
       <div style=" border: 1px solid gray; width: 800px;height: auto;margin-left: 400px;">
           <h3 style="text-align: center;background-color: #71ebda; padding: 20px 20px;">Cám ơn quý khách đã đặt hàng</h3>
           <div>
@@ -31,9 +29,9 @@
                   <ul>
                         <div style="float: right;">
                         <li></i> Mã hóa đơn : <b>MHD-0<?php if (isset($list_hdct['id']) && ($list_hdct['id'] != "")) echo $list_hdct['id']; ?></b></li>
-                        <li></i> ID km: <b> <?php if (isset($list_hdct['id_km']) && ($list_hdct['id_km'] != "")) echo $list_hdct['id_km']; ?></b></li>
+                        <li></i> Mã km:<b> KM-00<?php if (isset($list_hdct['id_km']) && ($list_hdct['id_km'] != "")) echo $list_hdct['id_km']; ?></b></li>
                         <li></i> Ngày đặt: <b> <?php if (isset($list_hdct['ngay_dat']) && ($list_hdct['ngay_dat'] != "")) echo $list_hdct['ngay_dat']; ?></b></li>    
-                        </div>
+                        </div>             
                       
                       <li></i> Tên khách hàng : <b> <?php if (isset($list_hdct['ten_kh']) && ($list_hdct['ten_kh'] != "")) echo $list_hdct['ten_kh']; ?></b></li>
                       <li> Address :<b> <?php if (isset($list_hdct['dia_chi']) && ($list_hdct['dia_chi'] != "")) echo $list_hdct['dia_chi']; ?></b></li>

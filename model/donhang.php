@@ -29,6 +29,8 @@ function load_sl_order()
     return $count_order;
 }
 
+//client
+
 function tongdonhang()
 {
     $tongtien = 0;
@@ -64,6 +66,7 @@ function load_one_hdct($id_hd)
     $bill = pdo_query_one($sql);
     return $bill;
 }
+
 function load_all_cthd($id_cthd)
 {
     $sql = "select chitiet_hd.*,sanpham.ten_sp,sanpham.mau_sac,sanpham.size_sp,hoa_don.tong_hd,hoa_don.trang_thai from chitiet_hd
@@ -109,11 +112,9 @@ function trangthai_donhang($trangthai)
         case '4':
             $stt = "Hủy đơn hàng";
             break;
+        case '5':
+            $stt = "Đã nhận hàng";
+            break;
     }
     return $stt;
-}
-
-
-function update_tt($id)
-{
 }

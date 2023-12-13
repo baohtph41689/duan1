@@ -49,9 +49,8 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                 if (isset($_POST['capnhap']) && $_POST['capnhap']) {
                     $tendm = $_POST['ten_dm'];
                     $mota = $_POST['mota'];
-                    $trangthai = $_POST['trangthai'];
                     $id = $_POST['id'];
-                    update_dm($tendm, $id, $mota, $trangthai);
+                    update_dm($tendm, $id, $mota);
                     $thongbao = "cap nhat thanh cong !";
                 }
                 $list_dm = load_list_dm();
@@ -404,7 +403,6 @@ if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
                 break;
             case "update_lh":
                 if (isset($_POST['capnhat']) && $_POST['capnhat']) {
-
                     $trangthai = $_POST['trangthai'];
                     $id = $_POST['idlh'];
                     $update_tt = update_lh($trangthai, $id);

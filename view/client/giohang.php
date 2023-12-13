@@ -15,7 +15,6 @@
     </div>
 </div>
 <!--breadcrumbs area end-->
-
 <!--shopping cart area start -->
 <div class="shopping_cart_area mt-60">
     <div class="container">
@@ -31,7 +30,7 @@
                                             <th class="product_remove">Xóa</th>
                                             <th class="product_thumb">Ảnh sản phẩm</th>
                                             <th class="product_name">Tên sản phẩm </th>
-                                            <th class="product-price">Size  </th>
+                                            <th class="product-price">Size </th>
                                             <th class="product-price">Màu sắc </th>
                                             <th class="product-price">Giá Sản phẩm</th>
                                             <th class="product_quantity">Số lượng</th>
@@ -44,15 +43,14 @@
                                         $tongtien = 0;
                                         $i = 0;
                                         $thanhtien = 0;
-                                      
                                         foreach ($_SESSION['mycard'] as $card) {
-                                            $id=$card['id'];
+                                            $id = $card['id'];
                                             $hinh = $card['hinhsp'];
                                             $tensp = $card['tensp'];
                                             $soluong = $card['soluong'];
                                             $giasp = $card['giasp'];
-                                            $sizesp=$card['size'];
-                                            $mausp=$card['mausp'];
+                                            $sizesp = $card['size'];
+                                            $mausp = $card['mausp'];
                                             $thanhtien = $card['giasp'] * $card['soluong'];
                                             $tongtien += $thanhtien;
                                             $linkdelete = "index.php?act=deletecard&id_card=" . $i;
@@ -63,7 +61,6 @@
                                                 $tienkm = 0;
                                                 $tienphaitra = $tongtien;
                                             }
-
                                         ?>
                                             <tr>
                                                 <td class="product_remove"><a href="<?= $linkdelete ?>"><i class="fa fa-trash-o"></i></a></td>
@@ -74,22 +71,18 @@
                                                 <td class="product-price"><?= number_format($giasp) ?><b>đ</b></td>
 
                                                 <td class="product_quantity">
-                                                    <a href="index.php?act=conggiohang&idsp=<?=$id?>"><i class="bi bi-plus"></i></a>
+                                                    <a href="index.php?act=trugiohang&idsp=<?= $id ?>"><i class="bi bi-dash"></i></a>
                                                     <?= $soluong ?>
-                                                    <a href="index.php?act=trugiohang&idsp=<?=$id?>"><i class="bi bi-dash"></i></a>
+                                                    <a href="index.php?act=conggiohang&idsp=<?= $id ?>"><i class="bi bi-plus"></i></a>
+
                                                 </td>
                                                 <td class="product_total"><?= number_format($thanhtien) ?><b>đ</b></td>
-
-
                                             </tr>
                                         <?php
                                             $i += 1;
                                         }
-
                                         ?>
-
                                     </tbody>
-
                                 </table>
                             </div>
                             <div class="cart_submit">
@@ -114,7 +107,6 @@
                                 </div>
                             </form>
                         </div>
-
                         <div class="coupon_code left">
                             <h3>Khuyến Mại</h3>
                             <div class="coupon_inner">
@@ -147,30 +139,23 @@
                                     <p>Khuyến mại (<?php if (isset($phantramkm) && ($phantramkm != "")) echo $phantramkm ?>%)</p>
                                     <p class="cart_amount"><span>:</span><?php if (isset($tienkm) && ($tienkm != "")) echo number_format($tienkm) ?><b>đ</b></p>
                                 </div>
-
-
                                 <div class="cart_subtotal">
                                     <p>Tổng tiền phải trả</p>
                                     <p class="cart_amount"><?= number_format($tienphaitra) ?><b>đ</b></p>
                                 </div>
                                 <div class="checkout_btn">
                                     <a href="index.php?act=thanhtoan">Thanh toán đơn hàng </a>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
             <!--coupon code area end-->
         </form>
     </div>
 </div>
 <!--shopping cart area end -->
-
 <!--brand area start-->
 <div class="brand_area color_five">
     <div class="container">
@@ -203,25 +188,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    // function xuLiTangSoLuong(event) {
-    //     console.log(event);
-    // }
-
-    $(".input-increase").bind('keyup change click', function(e) {
-        if (!$(this).data("previousValue") ||
-            $(this).data("previousValue") != $(this).val()
-        ) {
-            console.log("changed");
-            $(this).data("previousValue", $(this).val());
-        }
-
-    });
-
-
-    $(".input-increase").each(function() {
-        $(this).data("previousValue", $(this).val());
-    });
-</script>
 <!--brand area end-->

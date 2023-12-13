@@ -125,10 +125,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="banner-text">
-                            <h3>Exceptional Designer</h3>
+                            <h3>NHÀ THIẾT KẾ ĐẶC BIỆT</h3>
                             <h2>handbags and wallets</h2>
-                            <p>Narita fashion high quality handbag shop the numer 1 in cambodia that offers the highest quality for the best prices</p>
-                            <a href="shop.html">View Details</a>
+                            <p>Cửa hàng túi xách thời trang chất lượng cao Narita số 1 ở Campuchia cung cấp chất lượng cao nhất với giá tốt nhất</p>
+                         
                         </div>
                     </div>
                 </div>
@@ -212,18 +212,7 @@
         <!--product area end-->
 
         <!--bannr maug xám-->
-        <div class="home_instagram_area mb-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="instagram_text">
-                            <h2>Thế Giới Thời Trang</h2>
-                            <p>Hãy cho chúng tôi biết cách bạn tạo kiểu cho các tác phẩm Hiếm của mình trên Instagram với hashtag #Presiden.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!--instagram area end-->
 
         <!--tin tức mới-->
@@ -232,7 +221,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section_title">
-                            <h2>TIN TƯC MỚI</h2>
+                            <h2 style="padding-top: 50px;">TIN TỨC MỚI Nhất</h2>
                             <p>Bạn có muốn trình bày bài viết một cách tốt nhất để làm nổi bật những khoảnh khắc thú vị của tin tức của mình.</p>
                         </div>
                     </div>

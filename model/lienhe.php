@@ -32,3 +32,15 @@ function insertlh($noidung, $idkh)
     $sql = "INSERT INTO lien_he(noi_dung,id_user) VALUES('$noidung','$idkh')";
     pdo_execute($sql);
 }
+
+function status_contact($status){
+    switch ($status) {
+        case '0':
+            $stt = "Phản hồi mới";
+            break;
+        case '1':
+            $stt = "Đã phản hồi";
+            break;
+    }
+    return $stt;
+}

@@ -3,6 +3,7 @@ include './boxleft.php';
 is_array($load_one_lh);
 extract($load_one_lh);
 $idlh=$id;
+$ttlh = status_contact($trang_thai);
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -26,8 +27,12 @@ $idlh=$id;
             <textarea class="form-control" rows="3" placeholder="Enter ..."><?=$noi_dung?></textarea>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Trạng Thái</label>
-            <input type="text" name="trangthai" class="form-control" id="exampleInputPassword1" value="<?=$trang_thai?>">
+            <label>Trạng thái</label>
+            <select class="form-control" name="trangthai">
+            <option value="0"><?=$ttlh?></option>
+              <option value="1">Đã phản hồi</option>
+             
+            </select>
           </div>
         </div>
         <!-- /.card-body -->

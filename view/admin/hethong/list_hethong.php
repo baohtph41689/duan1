@@ -9,7 +9,7 @@ include './boxleft.php';
         <?php
         if (isset($_SESSION['user']['id_chucvu']) && ($_SESSION['user']['id_chucvu'] < 2)) {
         ?>
-          <a href="index.php?act=add_hethong"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a>
+          <!-- <a href="index.php?act=add_hethong"> <input type="button" class="btn btn-primary" value="Nhập thêm"></a> -->
         <?php
         }
         ?>

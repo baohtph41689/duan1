@@ -141,7 +141,7 @@
                             ?>
                               <div class="panel-default">
                                   <h4>Phương thức thanh toán</h4>
-                                  <label><input id="payment_defult" type="radio" value="1" name="pttt"> Thanh toán khi nhận hàng</label>
+                                  <label><input id="payment_defult" type="radio" value="Trả tiền mặt" name="pttt"> Thanh toán khi nhận hàng</label>
                                   <!-- <label><input id="payment_defult" type="radio" value="2" name="pttt"> Thanh toán momo</label> -->
                               </div>
                               <!-- <div onclick="handlePayment()">Thanh toan</div> -->

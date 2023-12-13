@@ -96,15 +96,15 @@
                            <?php
                             foreach ($list as $value) {
                                 extract($value);
-                                $link = "index.php?act=chitiettintuc&idnews=" . $id; 
+                                $link = "index.php?act=chitiettintuc&idnews=" . $id;
                             ?>
                                <div class="post_wrapper">
-                                   <div >
-                                       <a href="<?=$link?>"><img style="width:400px;height: 80px;" src="../../upload/<?=$anh_tin_tuc?>" alt=""></a>
+                                   <div>
+                                       <a href="<?= $link ?>"><img style="width:400px;height: 80px;" src="../../upload/<?= $anh_tin_tuc ?>" alt=""></a>
                                    </div>
                                    <div class="post_info">
-                                       <h4 style="font-size: 11px;padding-top: 10px;padding-left:5px;"><a href="<?=$link?>"><?=$tieu_de?></a></h4>
-                                       <span style="font-size: 11px;padding-top: 10px;padding-left:5px;"><?=$ngay_dang?></span>
+                                       <h4 style="font-size: 11px;padding-top: 10px;padding-left:5px;"><a href="<?= $link ?>"><?= $tieu_de ?></a></h4>
+                                       <span style="font-size: 11px;padding-top: 10px;padding-left:5px;"><?= $ngay_dang ?></span>
                                    </div>
                                </div>
                            <?php
